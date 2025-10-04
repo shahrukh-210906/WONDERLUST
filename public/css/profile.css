@@ -1,0 +1,164 @@
+/* Main container for profile page */
+.profile-container {
+    max-width: 960px;
+}
+
+/* Profile Header Styles */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #dc3545;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.profile-username {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.profile-email {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Tab Styles */
+.profile-tabs {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.profile-tabs .nav-link {
+    color: #495057;
+    font-weight: 600;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.profile-tabs .nav-link:hover {
+    color: #000;
+}
+
+.profile-tabs .nav-link.active {
+    color: #dc3545;
+    border-bottom: 3px solid #dc3545;
+    background-color: transparent;
+}
+
+.tab-content {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-top: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 1rem;
+}
+
+/* Booking Card Styles */
+.booking-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 0.75rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.booking-card-img-link img {
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+}
+
+.booking-card-info {
+    flex-grow: 1;
+}
+
+.booking-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.booking-card-dates,
+.booking-card-guests {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+/* Wishlist Item Styles (Refined) */
+.wishlist-item-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.wishlist-item-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.wishlist-item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.wishlist-item-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.wishlist-item-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    color: white;
+}
+
+.wishlist-item-info h6 {
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+    font-size: 0.95rem;
+}
+
+/* Empty State Styles */
+.tab-pane .text-center {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.text-muted{
+    color: white !important;
+}

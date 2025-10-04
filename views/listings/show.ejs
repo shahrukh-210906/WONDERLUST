@@ -1,0 +1,266 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/show.css">
+
+<div class="container py-5">
+  <div class="row">
+      <div class="col-12">
+          <a href="/listings" class="back-to-listings-link mb-4 d-inline-block">
+              <i class="fa-solid fa-arrow-left me-2"></i>Back to All Listings
+          </a>
+      </div>
+  </div>
+
+  <div class="listing-top mb-5">
+    <div>
+      <img src="<%= listing.image.url %>" alt="View of <%= listing.title %>" class="image-5-4">
+    </div>
+    <div class="Right">
+      <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+        <h1 class="listing-title mb-0"><%= listing.title %></h1>
+
+        <% if(currUser) { %>
+            <% const isWishlisted = currUser.wishlist && currUser.wishlist.some(item => item._id.equals(listing._id)); %>
+            <div class="wishlist-btn-show-page wishlist-btn" data-listing-id="<%= listing._id %>">
+                <i class="fa-heart <%= isWishlisted ? 'fa-solid' : 'fa-regular' %>"></i> 
+                <span><%= isWishlisted ? 'Saved' : 'Save' %></span>
+            </div>
+        <% } else { %>
+            <a href="/login" class="wishlist-btn-show-page">
+                <i class="fa-regular fa-heart"></i>
+                <span>Save</span>
+            </a>
+        <% } %>
+      </div>
+
+      <div class="d-flex flex-wrap align-items-center gap-3 text-muted">
+        <% 
+          let avgRating = 0;
+          let totalReviews = listing.reviews ? listing.reviews.length : 0;
+          if (totalReviews > 0) {
+            const total = listing.reviews.reduce((sum, r) => sum + r.rating, 0);
+            avgRating = (total / totalReviews).toFixed(1);
+          }
+        %>
+        <% if(totalReviews > 0) { %>
+          <span><i class="bi bi-star-fill text-warning me-1"></i><b><%= avgRating %></b> · <a href="#reviews" class="text-decoration-underline text-muted"><%= totalReviews %> reviews</a></span>
+        <% } else { %>
+          <span><i class="bi bi-star text-muted me-1"></i> No reviews yet</span>
+        <% } %>
+        <span class="d-none d-sm-inline">·</span>
+        <span><i class="bi bi-geo-alt-fill text-danger me-1"></i><%= listing.location %>, <%= listing.country %></span>
+      </div>
+
+      
+      <span class="text-muted d-block mt-2">4 guests · 2 bedrooms · 2 beds · 1 bath</span>
+
+      <div class="d-flex align-items-center gap-3 mb-2 mt-3">
+        <div class="bg-danger text-white rounded-circle d-flex justify-content-center align-items-center"
+             style="width:36px; height:36px; font-weight:bold; font-size:0.9rem;">
+          <%= listing.owner ?
+        listing.owner.username.charAt(0).toUpperCase() : 'U' %>
+        </div>
+        <div>
+          <h5 class="fw-semibold mb-0">Hosted by <%= listing.owner ?
+        listing.owner.username : 'Unknown' %></h5>
+        </div>
+      </div>
+
+      <% if(currUser && listing.owner && currUser._id.toString() === listing.owner._id.toString()) { %>
+        <div class="owner-actions">
+          <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-dark">Edit </a>
+          <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this listing?')">Delete </button>
+  
+                 </form>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="row g-5">
+    <div class="col-lg-7">
+        <hr>
+        <% if(listing.category) { %>
+            <% 
+                const categoryIcons = {
+                    Beach: 'fa-umbrella-beach', City: 'fa-city', Mountain: 'fa-mountain-sun',
+                    Cabin: 'fa-house-chimney', Historic: 'fa-landmark', Treehouse: 'fa-tree',
+                    Ski: 'fa-person-skiing', Luxury: 'fa-gem', Island: 'fa-island-tropical',
+                    Villa: 'fa-house-user', Cottage: 'fa-house-chimney-window', Safari: 'fa-binoculars'
+                };
+                const iconClass = categoryIcons[listing.category] || 'fa-home';
+            %>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fa-solid <%= iconClass %>"></i>
+                </div>
+                <div>
+                    <h5 class="category-title"><%= listing.category %> Property</h5>
+                    <p class="category-text text-muted">A unique stay in the <%= listing.category.toLowerCase() %> category.</p>
+                </div>
+            </div>
+            <hr>
+        <% } %>
+
+
+      <div class="mb-4">
+        <h4 class="fw-semibold mb-3"><i class="bi bi-house-heart-fill me-2"></i>About this place</h4>
+        <p class="text-secondary lh-lg"><%= listing.description 
+        %></p>
+      </div>
+
+      <hr>
+
+      <div class="mb-5">
+        <h4 class="fw-semibold mb-4">What this place offers</h4>
+        <div class="row g-3">
+          <div class="col-md-6 d-flex align-items-center"><i class="bi bi-wifi fs-4 me-3"></i> WiFi</div>
+          <div class="col-md-6 d-flex align-items-center"><i class="bi bi-snow fs-4 me-3"></i> Air Conditioning</div>
+          <div class="col-md-6 d-flex 
+        align-items-center"><i class="bi bi-p-square-fill fs-4 me-3"></i> Free Parking</div>
+          <div class="col-md-6 d-flex align-items-center"><i class="bi bi-tv-fill fs-4 me-3"></i> TV with Cable</div>
+          <div class="col-md-6 d-flex align-items-center"><i class="bi bi-cup-hot-fill fs-4 me-3"></i> Kitchen</div>
+          <div class="col-md-6 d-flex align-items-center"><i class="bi bi-water fs-4 me-3"></i> Pool</div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="booked-dates-card">
+  
+              <h4 class="fw-semibold">Currently Booked Dates</h4>
+        <% if(bookings && bookings.length > 0) { %>
+          <ul class="booked-dates-list">
+            <% bookings.forEach(booking => { %>
+              <li>
+                <i class="bi bi-calendar-x icon"></i>
+                
+                <div>
+                  <span class="date-range">
+                    <%= new Date(booking.checkIn).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) %>
+                    -
+                    <%= new Date(booking.checkOut).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) %>
+ 
+                                 </span>
+                </div>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p class="text-muted mb-0">This place has no bookings 
+        yet. Be the first to reserve!</p>
+        <% } %>
+      </div>
+
+      <hr>
+
+      <div id="reviews">
+        <h4 class="fw-semibold mb-4"><i class="bi bi-star-fill text-warning me-2"></i><%= avgRating %> · <%= totalReviews %> reviews</h4>
+        <div class="row g-4 mb-5">
+          <% if (!listing.reviews || listing.reviews.length === 0) { %>
+        
+            <p class="text-muted">No reviews yet. Be the first to share your experience!</p>
+          <% } else { %>
+            <% listing.reviews.slice(0, 4).forEach(review => { %>
+              <div class="col-md-6">
+                <div class="d-flex gap-3">
+                  <div class="bg-light text-secondary rounded-circle 
+        d-flex align-items-center justify-content-center flex-shrink-0"
+                       style="width:45px; height:45px; font-weight:bold;">
+                    <%= review.author ? review.author.username.charAt(0).toUpperCase() : '?' %>
+                  </div>
+                  <div>
+          
+                  <h6 class="mb-0"><%= review.author ? review.author.username : 'Anonymous' %></h6>
+                    <small class="text-muted"><%= new Date(review.createdAt).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' }) %></small>
+                    <p class="mb-1 mt-2 text-secondary"><%= review.comment %></p>
+                  </div>
+          
+              </div>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+
+        <% if(currUser){ %>
+          <div class="p-4 bg-light rounded-4">
+            <h5 class="fw-semibold mb-3">Leave a Review</h5>
+       
+             <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Your Rating</label>
+                <div class="star-rating">
+                  <% for(let i=5;
+        i>=1; i--) { %>
+                    <input type="radio" id="star<%= i %>" name="review[rating]" value="<%= i %>" required>
+                    <label for="star<%= i %>"><i class="bi bi-star-fill"></i></label>
+                  <% } %>
+                </div>
+       
+               </div>
+              <div class="mb-3">
+                <label for="comment" class="form-label fw-semibold">Your Comment</label>
+                <textarea class="form-control" id="comment" name="review[comment]" rows="3" placeholder="Share details of your own experience at this place" required></textarea>
+              </div>
+              
+        <button type="submit" class="btn btn-dark">Submit</button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <% if(currUser) { %>
+    <div class="col-lg-5">
+      <div class="card shadow border-0 rounded-4 p-4 sticky-top" style="top: 100px;">
+        <div class="d-flex align-items-baseline mb-3">
+         
+         <h3 class="fw-bold me-2">₹<%= listing.price.toLocaleString('en-IN') %></h3>
+          <span class="text-muted">/night</span>
+        </div>
+        <form action="/listings/<%= listing._id %>/book" method="POST" class="needs-validation" novalidate>
+          <div class="border rounded-3 p-3 mb-3">
+            <div class="row g-2">
+              <div class="col-md-6">
+                <label for="checkIn" class="form-label 
+        small">CHECK-IN</label>
+                <input type="date" id="checkIn" name="checkIn" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label for="checkOut" class="form-label small">CHECK-OUT</label>
+                <input type="date" id="checkOut" name="checkOut" class="form-control" required>
+          
+            </div>
+              <div class="col-12">
+                <label for="guests" class="form-label small">GUESTS</label>
+                <input type="number" id="guests" name="guests" class="form-control" min="1" value="1" required>
+              </div>
+            </div>
+          </div>
+   
+               <button type="submit" class="btn btn-danger w-100 btn-lg">Reserve</button>
+        </form>
+        <p class="text-center text-muted small mt-3 mb-0">You won't be charged yet</p>
+        <div id="price-details" class="d-none">
+          <hr class="my-4">
+          <div class="price-breakdown-row">
+            <span id="price-calculation-text">Price calculation</span>
+            <span id="subtotal-price">₹--</span>
+    
+              </div>
+          <div class="price-breakdown-row">
+            <span>Taxes & Service fees (18%)</span>
+            <span id="service-fee-price">₹--</span>
+          </div>
+          <div class="price-breakdown-row price-breakdown-total">
+            <span>Total</span>
+            <span id="total-price">₹--</span>
+       
+           </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+<script src="/js/show.js"></script>

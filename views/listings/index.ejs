@@ -1,0 +1,170 @@
+<% layout('layouts/boilerplate') %>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/listings.css">
+</head>
+
+<body>
+  <% 
+    const categoryIcons = {
+        All: 'fa-border-all', Beach: 'fa-umbrella-beach', City: 'fa-city', Mountain: 'fa-mountain-sun',
+        Cabin: 'fa-house-chimney', Historic: 'fa-landmark', Treehouse: 'fa-tree',
+        Ski: 'fa-person-skiing', Luxury: 'fa-gem', Island: 'fa-water',
+        Villa: 'fa-house-user', Cottage: 'fa-house-chimney-window', Safari: 'fa-binoculars'
+    };
+    // Helper to build query strings
+    const buildQuery = (newParams) => {
+      const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+      for (const key in newParams) {
+        params.set(key, newParams[key]);
+      }
+      // Preserve existing category filters for sort links
+      if (currentCategories && !newParams.category) {
+        currentCategories.forEach(cat => params.append('category', cat));
+      }
+      return params.toString() ? `?${params.toString()}` : '/listings';
+    };
+  %>
+  <div class="container mt-4">
+
+    <div class="filter-container d-none d-lg-flex">
+        <div class="filter-scroll-container">
+            <a href="/listings" class="filter-item <%= currentCategories.length === 0 ? 'active' : '' %>" data-category="All">
+                <i class="fa-solid <%= categoryIcons.All %>"></i>
+                <span>All</span>
+            </a>
+            <% for(let cat of categories) { %>
+                <a href="#" class="filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
+                    <i class="fa-solid <%= categoryIcons[cat] || 'fa-home' %>"></i>
+                    <span><%= cat %></span>
+                </a>
+            <% } %>
+        </div>
+        <div class="sort-container dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle sort-btn" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-sort-down"></i> <span id="sort-btn-text">Sort By</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sortDropdown">
+                <li><a class="dropdown-item" href="<%= buildQuery({ sort: 'price_asc' }) %>" data-sort-value="price_asc"><i class="bi bi-sort-numeric-down-alt me-2"></i>Price: Low to High</a></li>
+                <li><a class="dropdown-item" href="<%= buildQuery({ sort: 'price_desc' }) %>" data-sort-value="price_desc"><i class="bi bi-sort-numeric-up-alt me-2"></i>Price: High to Low</a></li>
+                <li><a class="dropdown-item" href="<%= buildQuery({ sort: 'latest' }) %>" data-sort-value="latest"><i class="bi bi-calendar-plus me-2"></i>Latest</a></li>
+                <li><a class="dropdown-item" href="<%= buildQuery({ sort: 'popular' }) %>" data-sort-value="popular"><i class="bi bi-star me-2"></i>Most Popular</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/listings">Clear All</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="filter-bar-mobile d-lg-none mb-3">
+        <button class="btn btn-dark w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtersOffcanvas" aria-controls="filtersOffcanvas">
+            <i class="bi bi-funnel"></i> Show Filters & Sort
+        </button>
+    </div>
+
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+      <% listings.forEach(listing => { %>
+        <div class="col">
+          <div class="card-container">
+            <a href="/listings/<%= listing.id %>" class="card-link"></a>
+            <img src="<%= listing.image.url %>" alt="<%= listing.title %>">
+            <% if (currUser) { %>
+                <% const isWishlisted = currUser.wishlist && currUser.wishlist.some(item => item._id.equals(listing._id)); %>
+                <div class="wishlist-btn" data-listing-id="<%= listing._id %>" title="Add to wishlist">
+                    <i class="fa-heart <%= isWishlisted ? 'fa-solid' : 'fa-regular' %>"></i>
+                </div>
+            <% } else { %>
+                 <div class="wishlist-btn" title="Log in to add to wishlist">
+                    <a href="/login" style="color: inherit; text-decoration: none;">
+                        <i class="fa-regular fa-heart"></i>
+                    </a>
+                </div>
+            <% } %>
+            <div class="card-info">
+              <p><b><%= listing.title %></b></p>
+              <p>₹<%= listing.price ? listing.price.toLocaleString('en-IN') + ' / night' : 'Price not available' %></p>
+              <p class="card-location">
+                <i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="filtersOffcanvas" aria-labelledby="filtersOffcanvasLabel">
+      <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="filtersOffcanvasLabel"><i class="bi bi-funnel"></i> Filters & Sort</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+          <div class="mb-4">
+              <h6>Categories</h6>
+              <div class="offcanvas-filter-list">
+                  <a href="#" class="offcanvas-filter-item <%= currentCategories.length === 0 ? 'active' : '' %>" data-category="All">
+                      <i class="fa-solid <%= categoryIcons.All %>"></i> All
+                  </a>
+                  <% for(let cat of categories) { %>
+                      <a href="#" class="offcanvas-filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
+                          <i class="fa-solid <%= categoryIcons[cat] || 'fa-home' %>"></i> <%= cat %>
+                      </a>
+                  <% } %>
+              </div>
+          </div>
+          <hr>
+          <div>
+              <h6>Sort By</h6>
+              <div class="offcanvas-filter-list">
+                  <a class="offcanvas-filter-item" href="<%= buildQuery({ sort: 'price_asc' }) %>"><i class="bi bi-sort-numeric-down-alt me-2"></i>Price: Low to High</a>
+                  <a class="offcanvas-filter-item" href="<%= buildQuery({ sort: 'price_desc' }) %>"><i class="bi bi-sort-numeric-up-alt me-2"></i>Price: High to Low</a>
+                  <a class="offcanvas-filter-item" href="<%= buildQuery({ sort: 'latest' }) %>"><i class="bi bi-calendar-plus me-2"></i>Latest</a>
+                  <a class="offcanvas-filter-item" href="<%= buildQuery({ sort: 'popular' }) %>"><i class="bi bi-star me-2"></i>Most Popular</a>
+              </div>
+          </div>
+          <div class="mt-4">
+              <a href="/listings" class="btn btn-outline-dark w-100">Clear All Filters</a>
+          </div>
+      </div>
+  </div>
+</body>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // This helper function needs to be available in the client-side scope
+    const buildQueryString = (newParams) => {
+        const url = new URL(window.location);
+        const params = url.searchParams;
+
+        // Set the new sort parameter
+        if (newParams.sort) {
+            params.set('sort', newParams.sort);
+        }
+
+        // Rebuild the full URL
+        return `${url.pathname}?${params.toString()}`;
+    };
+
+    // Update sort links to preserve category filters
+    const sortLinks = document.querySelectorAll('.dropdown-menu a[data-sort-value], .offcanvas-filter-list a[href*="?sort="]');
+    sortLinks.forEach(link => {
+        const sortVal = link.getAttribute('data-sort-value');
+        if (sortVal) {
+            link.href = buildQueryString({ sort: sortVal });
+        }
+    });
+
+    // Update the button text for the currently active sort
+    const sortBtnText = document.getElementById('sort-btn-text');
+    if (sortBtnText) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sortValue = urlParams.get('sort');
+        if (sortValue) {
+            const activeSortLink = document.querySelector(`.dropdown-item[data-sort-value="${sortValue}"]`);
+            if (activeSortLink) {
+                sortBtnText.textContent = activeSortLink.textContent.trim();
+            }
+        }
+    }
+});
+</script>

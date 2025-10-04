@@ -1,0 +1,266 @@
+body {
+  background-color: #f8f9fa;
+ font-family: 'Poppins', sans-serif;
+}
+
+
+/* === New, Cleaner Filter Bar Styles === */
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.filter-scroll-container {
+    flex-grow: 1;
+    display: flex;
+    gap: 2.5rem; /* Increased gap */
+    overflow-x: auto;
+    padding: 0 0.5rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.filter-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-item {
+    position: relative; /* Required for the underline pseudo-element */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem; /* Reduced gap between icon and text */
+    cursor: pointer;
+    color: #000; /* Changed to black */
+    padding-bottom: 1rem;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    opacity: 0.8;
+    text-decoration: none; /* This line removes the default underline */
+}
+.filter-item i {
+    font-size: 1.1rem; /* Smaller icon */
+}
+.filter-item span {
+    font-size: 0.75rem; /* Smaller text */
+    font-weight: 600;
+}
+
+.filter-item:hover {
+    opacity: 1;
+}
+
+/* Underline effect */
+.filter-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #dc3545;
+    transition: width 0.3s ease;
+}
+
+.filter-item:hover::after {
+    width: 100%; /* Underline expands on hover */
+}
+
+.filter-item.active {
+    color: #dc3545; /* Active color is now red */
+    opacity: 1;
+}
+.filter-item.active::after {
+    width: 100%; /* Underline is visible for active item */
+}
+
+
+.sort-container {
+    flex-shrink: 0;
+}
+
+
+/* New Sort Dropdown Styles */
+.sort-btn {
+    border-radius: 50px;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-color: #ddd;
+}
+
+.sort-btn:hover, .sort-btn:focus {
+    border-color: #dc3545;
+    background-color: #f8f9fa;
+    box-shadow: none;
+    color: #000;
+}
+
+.dropdown-menu {
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+}
+
+.dropdown-item {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item i {
+    color: #6c757d;
+}
+
+.dropdown-item:active {
+    background-color: #dc3545;
+    color: #fff;
+}
+.dropdown-item:active i {
+    color: #fff;
+}
+
+
+/* Cards grid */
+.card-container {
+  position: relative;
+ overflow: hidden;
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }
+
+.card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}
+
+.card-container:hover {
+  transform: translateY(-8px);
+ box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.card-container img {
+  width: 100%;
+ height: 22rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  transition: transform 0.4s ease;
+ }
+
+.card-container:hover img {
+  transform: scale(1.05);
+ }
+
+.card-info {
+  padding: 1rem;
+  background: white;
+  border-radius: 0 0 1rem 1rem;
+ margin-top: -0.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+.card-info p {
+  margin: 0.2rem 0;
+ }
+
+.card-info b {
+  font-size: 1.1rem;
+ }
+
+.card-category {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem !important;
+}
+
+.card-location {
+  font-size: 0.9rem;
+  color: #888;
+ }
+
+/* Wishlist button */
+.wishlist-btn {
+  position: absolute;
+ top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  justify-content: center;
+ align-items: center;
+  color: #dc3545;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 3;
+  cursor: pointer;
+ }
+
+.card-container:hover .wishlist-btn {
+  opacity: 1;
+ }
+
+/* Responsive grid */
+@media (max-width: 992px) {
+  .row.row-cols-lg-3 {
+    row-gap: 1.5rem;
+ }
+}
+
+/* === New Mobile Filter Styles === */
+
+/* Mobile Filter Trigger Button */
+.filter-bar-mobile .btn {
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    font-weight: 600;
+}
+
+/* Offcanvas Menu Content */
+.offcanvas-filter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.offcanvas-filter-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: #343a40;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.offcanvas-filter-item:hover {
+    background-color: #f1f1f1;
+    color: #000;
+}
+
+.offcanvas-filter-item i {
+    width: 20px;
+    text-align: center;
+    color: #6c757d;
+}
+.offcanvas-filter-item.active {
+    background-color: #fbebee;
+    color: #dc3545;
+    font-weight: 700;
+}
+.offcanvas-filter-item.active i {
+    color: #dc3545;
+}

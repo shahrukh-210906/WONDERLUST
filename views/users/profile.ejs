@@ -1,0 +1,91 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/profile.css">
+
+<div class="container my-5 profile-container">
+
+    <div class="profile-header mb-5">
+        <div class="profile-avatar">
+            <%= currUser.username.charAt(0).toUpperCase() %>
+        </div>
+        <div class="profile-info">
+            <h1 class="profile-username"><%= currUser.username %></h1>
+            <p class="profile-email text-muted"><%= currUser.email %></p>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs profile-tabs" id="profileTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="bookings-tab" data-bs-toggle="tab" data-bs-target="#bookings" type="button" role="tab" aria-controls="bookings" aria-selected="true">
+                <i class="bi bi-calendar-check me-2"></i>My Bookings
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="wishlist-tab" data-bs-toggle="tab" data-bs-target="#wishlist" type="button" role="tab" aria-controls="wishlist" aria-selected="false">
+                <i class="bi bi-heart me-2"></i>My Wishlist
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="profileTabContent">
+
+        <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
+            <% if(bookings && bookings.length > 0) { %>
+                <div class="row row-cols-1 g-4 py-4">
+                    <% bookings.forEach(booking => { %>
+                        <div class="col">
+                            <div class="booking-card">
+                                <a href="/listings/<%= booking.listing._id %>" class="booking-card-img-link">
+                                    <img src="<%= booking.listing.image.url %>" alt="<%= booking.listing.title %>">
+                                </a>
+                                <div class="booking-card-info">
+                                    <h5 class="booking-card-title"><%= booking.listing.title %></h5>
+                                    <p class="booking-card-dates text-muted">
+                                        <%= new Date(booking.checkIn).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) %>
+                                        -
+                                        <%= new Date(booking.checkOut).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) %>
+                                    </p>
+                                    <p class="booking-card-guests text-muted"><%= booking.guests %> Guests</p>
+                                </div>
+                                <div class="booking-card-actions">
+                                    <form action="/listings/<%= booking.listing._id %>/book/<%= booking._id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Cancel Booking</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <div class="text-center py-5">
+                    <p class="lead text-muted">You have no active bookings.</p>
+                    <a href="/listings" class="btn btn-dark">Explore Stays</a>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="tab-pane fade" id="wishlist" role="tabpanel" aria-labelledby="wishlist-tab">
+            <% if(wishlist && wishlist.length > 0) { %>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 py-4">
+                    <% wishlist.forEach(item => { %>
+                        <div class="col">
+                            <a href="/listings/<%= item._id %>" class="wishlist-item-link">
+                                <div class="wishlist-item-card">
+                                    <img src="<%= item.image.url %>" class="wishlist-item-img" alt="<%= item.title %>">
+                                    <div class="wishlist-item-info">
+                                        <h6 class="mb-0"><%= item.title %></h6>
+                                        <small class="text-muted"><%= item.location %></small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                 <div class="text-center py-5">
+                    <p class="lead text-muted">Your wishlist is empty.</p>
+                    <a href="/listings" class="btn btn-dark">Find Your Next Favorite</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

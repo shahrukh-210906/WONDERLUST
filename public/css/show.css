@@ -1,0 +1,142 @@
+.back-to-listings-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.back-to-listings-link:hover {
+    color: #dc3545;
+}
+
+/* Star rating */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.star-rating input[type="radio"] { display: none; }
+.star-rating label {
+  font-size: 1.5rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.star-rating input[type="radio"]:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ffc107;
+}
+
+/* Top section grid */
+.listing-top {
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 3rem;
+}
+
+/* Image 5:4 ratio */
+.image-5-4 {
+  width: 100%;
+  aspect-ratio: 6/4;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Listing title */
+.listing-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+/* Owner action buttons */
+.owner-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.owner-actions form {
+  display: inline;
+}
+
+/* Wishlist Button on Show Page */
+.wishlist-btn-show-page {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    color: #333;
+    background-color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.wishlist-btn-show-page:hover {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+}
+.wishlist-btn-show-page .fa-heart {
+    color: #dc3545;
+}
+.wishlist-btn-show-page .fa-solid {
+    font-weight: 900;
+}
+
+/* Booked Dates card */
+.booked-dates-card {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.booked-dates-card h4 {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+.booked-dates-list { list-style: none; padding: 0; margin: 0; }
+.booked-dates-list li {
+  display: flex; align-items: center; padding: 0.75rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+.booked-dates-list li:last-child { border-bottom: none; }
+.booked-dates-list .icon { color: #dc3545; font-size: 1.5rem; margin-right: 1rem; }
+.booked-dates-list .date-range { font-weight: 500; }
+
+/* Price breakdown */
+.price-breakdown-row { display: flex; justify-content: space-between; padding: 0.5rem 0; color: #495057; }
+.price-breakdown-total { font-weight: bold; font-size: 1.1rem; border-top: 1px solid #dee2e6; margin-top: 0.5rem; padding-top: 1rem; }
+
+/* Right Column adjustments */
+.Right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Buttons - square with rounded edges */
+.btn {
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1.25rem;
+}
+
+/* Responsive adjustments */
+@media(max-width: 991px) {
+  .listing-top {
+    grid-template-columns: 1fr;
+  }
+  .Right {
+    margin-top: 1.5rem;
+  }
+}

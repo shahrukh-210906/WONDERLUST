@@ -1,0 +1,71 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/forms.css">
+
+<div class="row mt-5">
+    <div class="col-lg-12 col-md-12">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Create a New Listing</h2>
+            </div>
+            <form action="/listings" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-type"></i></span>
+                        <input type="text" class="form-control" id="title" name="listing[title]" placeholder="Enter a catchy title" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="listing[description]" rows="3" placeholder="Write a short description about the place" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-tag-fill"></i></span>
+                            <input type="number" class="form-control" id="price" name="listing[price]" placeholder="Enter price" required>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                            <input type="text" class="form-control" id="country" name="listing[country]" placeholder="e.g., India" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                        <input type="text" class="form-control" id="location" name="listing[location]" placeholder="e.g., Mumbai, Maharashtra" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select class="form-select" id="category" name="listing[category]" required>
+                        <option selected disabled value="">Choose a category...</option>
+                        <option value="Beach">Beach</option>
+                        <option value="City">City</option>
+                        <option value="Mountain">Mountain</option>
+                        <option value="Cabin">Cabin</option>
+                        <option value="Historic">Historic</option>
+                        <option value="Treehouse">Treehouse</option>
+                        <option value="Ski">Ski</option>
+                        <option value="Luxury">Luxury</option>
+                        <option value="Island">Island</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Cottage">Cottage</option>
+                        <option value="Safari">Safari</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 submit-btn">Create Listing</button>
+            </form>
+        </div>
+    </div>
+</div>

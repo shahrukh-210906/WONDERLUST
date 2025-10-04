@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg sticky-top custom-navbar">
+  <div class="container py-2">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-danger fs-4" href="/">
+      <i class="fa-solid fa-compass"></i>
+      <span>WanderLust</span>
+    </a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars fs-4 text-danger"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+    
+  <ul class="navbar-nav me-auto d-flex align-items-center gap-3">
+        <li class="nav-item">
+   
+           <a class="nav-link nav-link-modern" href="/listings"><i class="fa-solid fa-earth-asia me-1"></i> Explore</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" href="/listings/new"><i class="fa-solid fa-plus me-1"></i> Add New</a>
+        </li>
+      </ul>
+
+      <form class="d-flex mx-auto search-bar" role="search" action="/listings" method="GET">
+        <input 
+          class="form-control me-2 search-input" 
+   
+           type="search" 
+          name="q" 
+          placeholder="Search by property, location, or country..." 
+          aria-label="Search"
+          required>
+       
+ <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+
+      <ul class="navbar-nav ms-auto d-flex align-items-center gap-3">
+        <% if (!currUser){ %>
+    
+           <li class="nav-item">
+            <a href="/login" class="btn btn-outline-light px-3 fw-semibold glass-btn">Login</a>
+          </li>
+          <li class="nav-item">
+       
+     <a href="/signup" class="btn btn-danger px-3 fw-semibold glass-btn">Sign Up</a>
+          </li>
+        <% } %>
+
+        <% if (currUser){ %>
+    
+           <li class="nav-item dropdown">
+            <a class="nav-link d-flex align-items-center gap-2 p-0" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <div class="navbar-avatar-sm">
+                <%= currUser.username.charAt(0).toUpperCase() %>
+              </div>
+              <span 
+ class="username-text">Hi, <%= currUser.username %></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 p-2">
+           
+   <li><a class="dropdown-item rounded-2" href="/profile"><i class="fa-regular fa-user me-2"></i> My Profile</a></li>
+              <li><a class="dropdown-item rounded-2 text-danger" href="/logout"><i class="fa-solid fa-right-from-bracket me-2"></i> Log Out</a></li>
+            </ul>
+          
+ </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<link rel="stylesheet" href="/css/navbar.css">

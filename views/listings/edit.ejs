@@ -1,0 +1,81 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/forms.css">
+<style>
+    .current-image-container {
+        border: 1px solid #dee2e6;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: #f8f9fa;
+    }
+    .current-image-container img {
+        width: 150px;
+        height: auto;
+        border-radius: 0.5rem;
+    }
+</style>
+
+<div class="row mt-5">
+    <div class="col-lg-10 offset-lg-1 col-md-12">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Edit Your Listing</h2>
+            </div>
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-type"></i></span>
+                        <input name="listing[title]" value="<%= listing.title %>" type="text" id="title" class="form-control" required />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" id="description" class="form-control" rows="3" required><%= listing.description %></textarea>
+                </div>
+                <div class="mb-3 current-image-container">
+                    <label class="form-label d-block">Current Image</label>
+                    <img src="<%= listing.image.url %>" alt="Listing Image">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload New Image</label>
+                    <input name="image" type="file" id="image" class="form-control" />
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <div class="input-group">
+                             <span class="input-group-text"><i class="bi bi-tag-fill"></i></span>
+                            <input name="listing[price]" value="<%= listing.price %>" type="number" min="0" id="price" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                            <input name="listing[country]" value="<%= listing.country %>" type="text" id="country" class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                        <input name="listing[location]" value="<%= listing.location %>" type="text" id="location" class="form-control" required />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select class="form-select" id="category" name="listing[category]" required>
+                        <% const categories = ['Beach', 'City', 'Mountain', 'Cabin', 'Historic', 'Treehouse', 'Ski', 'Luxury', 'Island', 'Villa', 'Cottage', 'Safari']; %>
+                        <% for (let category of categories) { %>
+                            <option value="<%= category %>" <%= listing.category === category ? 'selected' : '' %>>
+                                <%= category %>
+                            </option>
+                        <% } %>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 submit-btn">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>

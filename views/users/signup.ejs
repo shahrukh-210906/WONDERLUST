@@ -1,0 +1,41 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/forms.css">
+
+<div class="row mt-5">
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Sign Up</h2>
+            </div>
+            <form action="/signup" method="POST" novalidate class="needs-validation">
+                <div class="mb-3">
+    
+                     <label for="username" class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                     <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 submit-btn">Sign Up</button>
+            </form>
+            <div class="form-footer-link">
+                Already have an account?
+ <a href="/login">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
