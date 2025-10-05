@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const { isLoggedIn, isReviewAuthor } = require('../middleware.js');
 const { reviewSchema } = require('../schema.js');
 const reviewsController = require('../controllers/reviews');
+const ExpressError = require('../utils/ExpressError.js')
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
