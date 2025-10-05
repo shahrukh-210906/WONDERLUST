@@ -109,7 +109,7 @@ app.use('/', userRoutes);
 
 //localhost route
 app.get('/', (req, res) => {
-  res.render('home.ejs');
+  res.render('index.ejs');
 });
 
 // Example route: /listings/search?q=paris
