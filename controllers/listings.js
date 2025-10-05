@@ -1,6 +1,6 @@
 const Listing = require('../models/listing');
 const Booking = require('../models/booking');
-const ExpressError = require('../utils/expressError');
+const ExpressError = require('../utils/ExpressError');
 
 module.exports.index = async (req, res) => {
     const { sort, q } = req.query;

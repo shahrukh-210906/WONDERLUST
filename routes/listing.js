@@ -8,7 +8,7 @@ const wrapAsync = require('../utils/wrapAsync');
 const { listingSchema } = require('../schema.js');
 const { isLoggedIn, isOwner } = require('../middleware.js');
 const listingsController = require('../controllers/listings');
-const ExpressError = require('../utils/expressError');
+const ExpressError = require('../utils/ExpressError');
 
 
 router.use(express.json());
