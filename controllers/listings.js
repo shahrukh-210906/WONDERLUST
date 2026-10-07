@@ -33,7 +33,6 @@ module.exports.index = async (req, res) => {
             { $sort: { reviewCount: -1 } }
         ];
         listings = await Listing.aggregate(pipeline);
-        await Listing.populate(listings, { path: "owner" });
     } else {
         let query = Listing.find(filter);
         switch (sort) {
@@ -47,12 +46,13 @@ module.exports.index = async (req, res) => {
                 query = query.sort({ createdAt: -1 });
                 break;
         }
-        listings = await query.populate('owner');
+        listings = await query.lean();
     }
 
-    res.render('listings/index', { 
-        listings, 
-        categories: allCategories, 
+    res.vary('X-Listing-Partial');
+    res.render(req.get('X-Listing-Partial') === '1' ? 'listings/results' : 'listings/index', {
+        listings,
+        categories: allCategories,
         currentCategories: Array.isArray(category) ? category : (category ? [category] : [])
     });
 };
@@ -97,7 +97,7 @@ module.exports.showListing = async (req, res) => {
         req.flash('error', 'Cannot find that listing!');
         return res.redirect('/listings');
     }
-    
+
     // Fetch bookings for this listing
     const bookings = await Booking.find({ listing: id });
 

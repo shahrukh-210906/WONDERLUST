@@ -1,7 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
+const bindWishlistButtons = () => {
     const wishlistButtons = document.querySelectorAll('.wishlist-btn');
 
     wishlistButtons.forEach(button => {
+        if (button.dataset.wishlistBound) return;
+        button.dataset.wishlistBound = 'true';
         // Skip buttons that are just links to login
         if (button.tagName === 'A') {
             return;
@@ -61,4 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
+};
+document.addEventListener('DOMContentLoaded', bindWishlistButtons);
+document.addEventListener('listings:updated', bindWishlistButtons);

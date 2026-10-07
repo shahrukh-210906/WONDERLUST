@@ -29,3 +29,4 @@
 .card-info{padding-bottom:10px}
 }
 
+.filter-status{font-size:13px;color:var(--muted);min-height:22px;margin:0 0 12px}#stay-results[aria-busy="true"]{opacity:.6;pointer-events:none}

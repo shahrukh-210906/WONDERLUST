@@ -62,7 +62,7 @@
 
             <% for(let cat of categories) { %>
 
-                <a href="#" class="filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
+                <a href="/listings?category=<%= encodeURIComponent(cat) %>" class="filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
 
                     <i class="fa-solid <%= categoryIcons[cat] || 'fa-home' %>"></i>
 
@@ -112,59 +112,9 @@
 
     </div>
 
-    <% if (!listings.length) { %><div class="empty-state"><i class="bi bi-compass" aria-hidden="true"></i><h2>A different direction?</h2><p>No stays match these filters. Try another destination or explore all stays.</p><a class="btn btn-primary" href="/listings">Explore all stays</a></div><% } %>
-
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
-
-      <% listings.forEach(listing => { %>
-
-        <div class="col">
-
-          <div class="card-container">
-
-            <a href="/listings/<%= listing._id %>" class="card-link" aria-label="View <%= listing.title %>"></a>
-
-            <img loading="lazy" src="<%= listing.image?.url || '/images/listing-placeholder.svg' %>" alt="<%= listing.title %>">
-
-            <% if (currUser) { %>
-
-                <% const isWishlisted = currUser.wishlist && currUser.wishlist.some(item => item._id.equals(listing._id)); %>
-
-                <button type="button" class="wishlist-btn" data-listing-id="<%= listing._id %>" aria-label="Save <%= listing.title %>" aria-pressed="<%= isWishlisted %>">
-
-                    <i aria-hidden="true" class="fa-heart <%= isWishlisted ? 'fa-solid' : 'fa-regular' %>"></i>
-
-                </button>
-
-            <% } else { %>
-
-<a href="/login" class="wishlist-btn" aria-label="Log in to save <%= listing.title %>"><i class="fa-regular fa-heart" aria-hidden="true"></i></a>
-
-            <% } %>
-
-            <div class="card-info">
-
-              <p><b><%= listing.title %></b></p>
-
-              <p>₹<%= listing.price ? listing.price.toLocaleString('en-IN') + ' / night' : 'Price not available' %></p>
-
-              <p class="card-location">
-
-                <i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %>
-
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      <% }) %>
-
-    </div>
-
-  </div>
+<p id="filter-status" class="filter-status" role="status" aria-live="polite"></p>
+<%- include('results') %>
+</div>
 
   <div class="offcanvas offcanvas-start" tabindex="-1" id="filtersOffcanvas" aria-labelledby="filtersOffcanvasLabel">
 
@@ -192,7 +142,7 @@
 
                   <% for(let cat of categories) { %>
 
-                      <a href="#" class="offcanvas-filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
+                      <a href="/listings?category=<%= encodeURIComponent(cat) %>" class="offcanvas-filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
 
                           <i class="fa-solid <%= categoryIcons[cat] || 'fa-home' %>"></i> <%= cat %>
 
@@ -212,13 +162,13 @@
 
               <div class="offcanvas-filter-list">
 
-                  <a class="offcanvas-filter-item" href="<%= buildQuery({ sort: 'price_asc' }) %>"><i class="bi bi-sort-numeric-down-alt me-2"></i>Price: Low to High</a>
+                  <a class="offcanvas-filter-item" data-sort-value="price_asc" href="<%= buildQuery({ sort: 'price_asc' }) %>"><i class="bi bi-sort-numeric-down-alt me-2"></i>Price: Low to High</a>
 
-                  <a class="offcanvas-filter-item" href="<%= buildQuery({ sort: 'price_desc' }) %>"><i class="bi bi-sort-numeric-up-alt me-2"></i>Price: High to Low</a>
+                  <a class="offcanvas-filter-item" data-sort-value="price_desc" href="<%= buildQuery({ sort: 'price_desc' }) %>"><i class="bi bi-sort-numeric-up-alt me-2"></i>Price: High to Low</a>
 
-                  <a class="offcanvas-filter-item" href="<%= buildQuery({ sort: 'latest' }) %>"><i class="bi bi-calendar-plus me-2"></i>Latest</a>
+                  <a class="offcanvas-filter-item" data-sort-value="latest" href="<%= buildQuery({ sort: 'latest' }) %>"><i class="bi bi-calendar-plus me-2"></i>Latest</a>
 
-                  <a class="offcanvas-filter-item" href="<%= buildQuery({ sort: 'popular' }) %>"><i class="bi bi-star me-2"></i>Most Popular</a>
+                  <a class="offcanvas-filter-item" data-sort-value="popular" href="<%= buildQuery({ sort: 'popular' }) %>"><i class="bi bi-star me-2"></i>Most Popular</a>
 
               </div>
 
