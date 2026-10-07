@@ -43,6 +43,9 @@ const listingSchema = new Schema({
     ]
 }, { timestamps: true });
 
+listingSchema.index({ category: 1, price: 1 });
+listingSchema.index({ createdAt: -1 });
+
 listingSchema.post('findOneAndDelete', async function(listing) {
     if(listing){
         await mongoose.model('Review').deleteMany({

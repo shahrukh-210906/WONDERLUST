@@ -41,7 +41,9 @@ module.exports.logout = (req, res, next) => {
 
 // Render profile
 module.exports.renderProfile = async (req, res) => {
-    const bookings = await Booking.find({ user: req.user._id }).populate('listing');
-    const user = await User.findById(req.user._id).populate('wishlist');
+    const [bookings, user] = await Promise.all([
+        Booking.find({ user: req.user._id }).populate('listing'),
+        User.findById(req.user._id).populate('wishlist')
+    ]);
     res.render('users/profile', { bookings, wishlist: user.wishlist });
 };

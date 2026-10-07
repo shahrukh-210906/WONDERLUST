@@ -35,7 +35,7 @@
                         <div class="col">
                             <div class="booking-card">
                                 <a href="/listings/<%= booking.listing._id %>" class="booking-card-img-link">
-                                    <img src="<%= booking.listing.image?.url || '/images/listing-placeholder.svg' %>" alt="<%= booking.listing.title %>">
+                                    <img loading="lazy" decoding="async" src="<%= imageUrl(booking.listing.image?.url, 800) %>" alt="<%= booking.listing.title %>">
                                 </a>
                                 <div class="booking-card-info">
                                     <h5 class="booking-card-title"><%= booking.listing.title %></h5>
@@ -70,7 +70,7 @@
                         <div class="col">
                             <a href="/listings/<%= item._id %>" class="wishlist-item-link">
                                 <div class="wishlist-item-card">
-                                    <img src="<%= item.image?.url || '/images/listing-placeholder.svg' %>" class="wishlist-item-img" alt="<%= item.title %>">
+                                    <img loading="lazy" decoding="async" src="<%= imageUrl(item.image?.url, 800) %>" class="wishlist-item-img" alt="<%= item.title %>">
                                     <div class="wishlist-item-info">
                                         <h6 class="mb-0"><%= item.title %></h6>
                                         <small class="text-muted"><%= item.location %></small>

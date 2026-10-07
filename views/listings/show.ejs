@@ -12,14 +12,14 @@
 
   <div class="listing-top mb-5">
     <div>
-      <img src="<%= listing.image?.url || '/images/listing-placeholder.svg' %>" alt="View of <%= listing.title %>" class="image-5-4">
+      <img decoding="async" src="<%= imageUrl(listing.image?.url, 1400) %>" alt="View of <%= listing.title %>" class="image-5-4">
     </div>
     <div class="Right"><p class="eyebrow">YOUR NEXT HOME AWAY FROM HOME</p>
       <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
         <h1 class="listing-title mb-0"><%= listing.title %></h1>
 
         <% if(currUser) { %>
-            <% const isWishlisted = currUser.wishlist && currUser.wishlist.some(item => item._id.equals(listing._id)); %>
+            <% const isWishlisted = currUser.wishlist && currUser.wishlist.some(item => String(item._id || item) === String(listing._id)); %>
             <button type="button" class="wishlist-btn-show-page wishlist-btn" data-listing-id="<%= listing._id %>" aria-label="Save this stay" aria-pressed="<%= isWishlisted %>">
                 <i class="fa-heart <%= isWishlisted ? 'fa-solid' : 'fa-regular' %>"></i> 
                 <span><%= isWishlisted ? 'Saved' : 'Save' %></span>

@@ -30,11 +30,12 @@ module.exports.index = async (req, res) => {
         const pipeline = [
             { $match: filter },
             { $addFields: { reviewCount: { $size: "$reviews" } } },
-            { $sort: { reviewCount: -1 } }
+            { $sort: { reviewCount: -1 } },
+            { $project: { title: 1, price: 1, image: 1, location: 1, country: 1, category: 1 } }
         ];
         listings = await Listing.aggregate(pipeline);
     } else {
-        let query = Listing.find(filter);
+        let query = Listing.find(filter, 'title price image location country category');
         switch (sort) {
             case 'price_asc':
                 query = query.sort({ price: 1 });
@@ -90,8 +91,8 @@ module.exports.createListing = async (req, res) => {
 module.exports.showListing = async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id)
-        .populate({ path: 'reviews', populate: { path: 'author' } })
-        .populate('owner');
+        .populate({ path: 'reviews', populate: { path: 'author', select: 'username' } })
+        .populate('owner', 'username');
 
     if (!listing) {
         req.flash('error', 'Cannot find that listing!');

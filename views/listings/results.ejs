@@ -10,11 +10,11 @@
 
             <a href="/listings/<%= listing._id %>" class="card-link" aria-label="View <%= listing.title %>"></a>
 
-            <img loading="lazy" src="<%= listing.image?.url || '/images/listing-placeholder.svg' %>" alt="<%= listing.title %>">
+            <img loading="lazy" decoding="async" src="<%= imageUrl(listing.image?.url, 800) %>" srcset="<%= imageUrl(listing.image?.url, 400) %> 400w, <%= imageUrl(listing.image?.url, 800) %> 800w" sizes="(min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" alt="<%= listing.title %>">
 
             <% if (currUser) { %>
 
-                <% const isWishlisted = currUser.wishlist && currUser.wishlist.some(item => item._id.equals(listing._id)); %>
+                <% const isWishlisted = currUser.wishlist && currUser.wishlist.some(item => String(item._id || item) === String(listing._id)); %>
 
                 <button type="button" class="wishlist-btn" data-listing-id="<%= listing._id %>" aria-label="Save <%= listing.title %>" aria-pressed="<%= isWishlisted %>">
 

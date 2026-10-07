@@ -20,7 +20,7 @@ test('category updates preserve filters and render only the results fragment', a
             vary(name) { assert.equal(name, 'X-Listing-Partial'); },
             render(view, data) {
                 assert.equal(view, 'listings/results');
-                fragment = ejs.render(fs.readFileSync(path.join(__dirname, '../views/listings/results.ejs'), 'utf8'), { ...data, currUser: null });
+                fragment = ejs.render(fs.readFileSync(path.join(__dirname, '../views/listings/results.ejs'), 'utf8'), { ...data, currUser: null, imageUrl: require('../utils/imageUrl') });
             }
         });
         assert.deepEqual(queryFilter.category, { $in: ['Cabin', 'Mountain'] });
@@ -28,7 +28,13 @@ test('category updates preserve filters and render only the results fragment', a
         assert.match(fragment, /id="stay-results" data-count="1"/);
         assert.match(fragment, /Mountain cabin/);
         assert.doesNotMatch(fragment, /<!DOCTYPE|navbar/);
-        const empty = ejs.render(fs.readFileSync(path.join(__dirname, '../views/listings/results.ejs'), 'utf8'), { listings: [], currUser: null });
+        for (const wishlist of [['sample'], [{ _id: 'sample' }]]) {
+            const saved = ejs.render(fs.readFileSync(path.join(__dirname, '../views/listings/results.ejs'), 'utf8'), {
+                listings: records, currUser: { wishlist }, imageUrl: require('../utils/imageUrl')
+            });
+            assert.match(saved, /aria-pressed="true"/);
+        }
+        const empty = ejs.render(fs.readFileSync(path.join(__dirname, '../views/listings/results.ejs'), 'utf8'), { listings: [], currUser: null, imageUrl: require('../utils/imageUrl') });
         assert.match(empty, /No stays match/);
     } finally { Listing.find = original; }
 });
