@@ -1,5 +1,6 @@
 .filter-container{display:flex;align-items:center;gap:24px;margin:12px 0 32px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.filter-scroll-container{flex:1;display:flex;gap:12px;overflow-x:auto;padding:5px 0;scrollbar-width:thin}
+.filter-scroll-container{flex:1;display:flex;gap:12px;overflow-x:auto;padding:5px 0;scrollbar-width:none}
+.filter-scroll-container::-webkit-scrollbar{display:none}
 .filter-item{display:flex;align-items:center;gap:9px;white-space:nowrap;padding:11px 16px;border-radius:30px;color:var(--muted);font-size:12px;min-height:44px;border:1px solid transparent}
 .filter-item.active{background:var(--soft);border-color:var(--line);color:var(--ink)}
 .filter-item:hover{color:var(--accent);background:var(--soft)}
