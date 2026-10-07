@@ -1,95 +1,41 @@
-/* General Form Card Styling */
-.form-container {
-    padding: 2rem 0;
+.form-card{background:white;padding:36px;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 30px #242b2805}
+.form-header{text-align:left;margin-bottom:30px}
+.form-header h1{font-size:32px}
+.form-description{color:var(--muted);font-size:14px;max-width:560px;margin:14px 0 0}
+.form-card .mb-3{margin-bottom:22px!important}
+.form-card textarea{min-height:125px}
+.input-group .form-control{border-left:0}
+.input-group:focus-within .input-group-text{border-color:var(--accent)}
+.submit-btn{padding:14px;min-height:50px}
+.form-footer-link{text-align:center;font-size:13px;color:var(--muted);margin-top:24px}
+.form-footer-link a{font-weight:600;color:var(--accent)}
+.auth-shell{display:grid;grid-template-columns:1fr 1fr;background:white;border:1px solid var(--line);border-radius:20px;overflow:hidden;max-width:1100px;margin:45px auto 0;min-height:620px}
+.auth-aside{position:relative;background:#24433a;min-height:100%;color:white;overflow:hidden}
+.auth-aside:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#152b24d9,transparent 80%)}
+.auth-aside img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.auth-aside>div{position:absolute;bottom:45px;left:38px;right:38px;z-index:1}
+.auth-aside .eyebrow{color:#f5ddc5;font-size:9px}
+.auth-aside h2{color:white;font-size:34px;line-height:1.2}
+.auth-aside p:last-child{font-size:14px;color:#e3e9e1;margin:16px 0 0}
+.auth-form{display:flex;align-items:center;padding:28px 16px;min-width:0}
+.auth-form .form-card{width:100%;border:0;box-shadow:none;padding:30px}
+.auth-form .form-header h1{font-size:31px}
+.auth-form .eyebrow{font-size:9px}
+.hosting-form{max-width:900px;margin:40px auto 0}
+.hosting-form>[class*=col]{width:100%;margin-left:0}
+.hosting-form .form-card{padding:42px}
+.current-image-container{background:var(--paper)!important;border-color:var(--line)!important}
+.current-image-container img{width:190px!important;height:120px!important;object-fit:cover}
+@media(max-width:767px){.auth-shell{grid-template-columns:1fr;margin:24px auto 0;min-height:auto}
+.auth-aside{min-height:230px}
+.auth-aside>div{left:25px;bottom:25px}
+.auth-aside h2{font-size:27px}
+.auth-aside .eyebrow{margin-bottom:12px}
+.auth-form{padding:12px}
+.auth-form .form-card{padding:23px 12px}
+.auth-form .form-header h1{font-size:28px}
+.hosting-form{margin-top:24px}
+.hosting-form .form-card{padding:26px 20px}
+.form-header h1{font-size:28px}
 }
 
-.form-card {
-    background-color: #fff;
-    padding: 2.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
-}
-
-.form-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.form-header h2 {
-    font-weight: 700;
-    color: #343a40;
-}
-
-/* Form Labels */
-.form-label {
-    font-weight: 600;
-    color: #495057;
-    margin-bottom: 0.5rem;
-}
-
-/* Input Group with Icons */
-.input-group .form-control {
-    border-radius: 0 0.5rem 0.5rem 0;
-    padding: 0.75rem 1.25rem;
-    border: 1px solid #ced4da;
-    border-left: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.input-group-text {
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-right: none;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem 0 0 0.5rem;
-    color: #6c757d;
-    transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.input-group:focus-within .input-group-text {
-    border-color: #dc3545;
-    color: #dc3545;
-}
-
-.form-control:focus {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.2);
-    z-index: 2;
-    /* Ensures the focused input's box-shadow appears correctly */
-}
-
-/* Submit Button */
-.submit-btn {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-}
-
-.submit-btn:hover {
-    background-color: #b02a37;
-    border-color: #b02a37;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
-}
-
-/* Form Footer Link */
-.form-footer-link {
-    text-align: center;
-    margin-top: 1.5rem;
-}
-
-.form-footer-link a {
-    color: #dc3545;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.form-footer-link a:hover {
-    text-decoration: underline;
-}

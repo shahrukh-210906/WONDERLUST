@@ -1,41 +1,79 @@
-<% layout("/layouts/boilerplate") %>
+<% layout("layouts/boilerplate") %>
+
 <link rel="stylesheet" href="/css/forms.css">
 
-<div class="row mt-5">
-    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+<div class="auth-shell"><aside class="auth-aside"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1000&q=80" alt="Lakeside escape beneath the mountains" width="1000" height="1200"><div><p class="eyebrow">A LITTLE FURTHER FROM ORDINARY</p><h2>Somewhere new.<br>Something unforgettable.</h2><p>Your next favourite place is waiting.</p></div></aside>
+
+    <div class="auth-form">
+
         <div class="form-card">
+
             <div class="form-header">
-                <h2>Sign Up</h2>
+
+                <p class="eyebrow">A WORLD OF POSSIBILITY</p><h1>Make room for adventure.</h1><p class="form-description">Create an account to save stays, plan trips, and share your space.</p>
+
             </div>
+
             <form action="/signup" method="POST" novalidate class="needs-validation">
+
                 <div class="mb-3">
+
     
+
                      <label for="username" class="form-label">Username</label>
+
                     <div class="input-group">
+
                         <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+
+                        <input type="text" class="form-control" id="username" name="username" autocomplete="username" placeholder="Choose a username" required>
+
                     </div>
+
                 </div>
+
                 <div class="mb-3">
+
                     <label for="email" class="form-label">Email</label>
+
                      <div class="input-group">
+
                         <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+
+                        <input type="email" class="form-control" id="email" name="email" autocomplete="email" placeholder="Enter your email" required>
+
                     </div>
+
                 </div>
+
                 <div class="mb-4">
+
                     <label for="password" class="form-label">Password</label>
+
                     <div class="input-group">
+
                         <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
+
+                        <input type="password" class="form-control" id="password" name="password" autocomplete="new-password" placeholder="Create a password" required>
+
                     </div>
+
                 </div>
+
                 <button type="submit" class="btn btn-primary w-100 submit-btn">Sign Up</button>
+
             </form>
+
             <div class="form-footer-link">
+
                 Already have an account?
+
  <a href="/login">Login</a>
+
             </div>
+
         </div>
+
     </div>
+
 </div>

@@ -14,11 +14,11 @@
     }
 </style>
 
-<div class="row mt-5">
+<div class="row hosting-form">
     <div class="col-lg-10 offset-lg-1 col-md-12">
         <div class="form-card">
             <div class="form-header">
-                <h2>Edit Your Listing</h2>
+                <p class="eyebrow">YOUR PLACE, AT ITS BEST</p><h1>A little refresh.</h1><p class="form-description">Update your photos and details so guests know exactly what to look forward to.</p>
             </div>
             <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                 <div class="mb-3">
@@ -34,15 +34,15 @@
                 </div>
                 <div class="mb-3 current-image-container">
                     <label class="form-label d-block">Current Image</label>
-                    <img src="<%= listing.image.url %>" alt="Listing Image">
+                    <img src="<%= listing.image?.url || '/images/listing-placeholder.svg' %>" alt="Listing Image">
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload New Image</label>
-                    <input name="image" type="file" id="image" class="form-control" />
+                    <input name="image" type="file" id="image" class="form-control" accept="image/*" />
                 </div>
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label for="price" class="form-label">Price</label>
+                        <label for="price" class="form-label">Nightly price (₹)</label>
                         <div class="input-group">
                              <span class="input-group-text"><i class="bi bi-tag-fill"></i></span>
                             <input name="listing[price]" value="<%= listing.price %>" type="number" min="0" id="price" class="form-control" required />

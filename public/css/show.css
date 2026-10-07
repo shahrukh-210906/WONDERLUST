@@ -1,142 +1,49 @@
-.back-to-listings-link {
-    text-decoration: none;
-    color: #333;
-    font-weight: 600;
-    transition: color 0.2s ease;
+.back-to-listings-link{color:var(--muted);font-size:13px}
+.back-to-listings-link:hover{color:var(--accent)}
+.listing-top{display:grid;grid-template-columns:1.15fr 1fr;gap:46px;align-items:center}
+.image-5-4{width:100%;aspect-ratio:6/5;object-fit:cover;border-radius:18px;background:var(--soft)}
+.Right{min-width:0}
+.listing-title{font-size:clamp(28px,3vw,43px);font-weight:600;line-height:1.18;overflow-wrap:anywhere}
+.wishlist-btn-show-page{display:flex;align-items:center;gap:8px;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:30px;background:white;font-size:13px;color:var(--ink);white-space:nowrap;cursor:pointer}
+.wishlist-btn-show-page .fa-heart{color:var(--accent)}
+.owner-actions{display:flex;gap:10px;margin-top:25px}
+.owner-actions form{margin:0}
+.category-card{display:flex;align-items:center;gap:18px;padding:8px 0}
+.category-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:12px;background:var(--soft);color:var(--accent);font-size:21px}
+.category-title{font-size:18px;margin:0 0 5px}
+.category-text{font-size:14px;margin:0}
+.reservation-card{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 35px #242b2808;z-index:5!important}
+.reservation-card .border{border-color:var(--line)!important;background:var(--paper)}
+.reservation-card label{font-size:10px;letter-spacing:1px;font-weight:700}
+.reservation-card h3{font-size:28px}
+.reservation-card .btn-lg{font-size:15px}
+.booked-dates-card{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:25px}
+.booked-dates-card h4{font-size:19px;margin-bottom:15px}
+.booked-dates-list{list-style:none;padding:0;margin:0}
+.booked-dates-list li{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.booked-dates-list li:last-child{border:0}
+.booked-dates-list .icon{color:var(--accent)}
+.price-breakdown-row{display:flex;justify-content:space-between;gap:15px;padding:8px 0;color:var(--muted);font-size:14px}
+.price-breakdown-total{border-top:1px solid var(--line);margin-top:10px;padding-top:15px;font-weight:700;color:var(--ink)}
+.star-rating{display:flex;flex-direction:row-reverse;justify-content:flex-end;position:relative}
+.star-rating input{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.star-rating label{font-size:26px;color:#91978c;cursor:pointer;min-width:44px;min-height:44px}
+.star-rating input:checked~label,.star-rating label:hover,.star-rating label:hover~label{color:#9e6b11}
+.star-rating input:focus-visible+label{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+#reviews h4{font-size:21px}
+#reviews .col-md-6>.d-flex{padding:20px;background:white;border:1px solid var(--line);border-radius:12px;height:100%}
+.listing-top~.row h4{font-size:21px}
+@media(max-width:991px){.listing-top{grid-template-columns:1fr;gap:28px}
+.image-5-4{aspect-ratio:16/10}
+.reservation-card.sticky-top{position:static!important}
+}
+@media(max-width:575px){.listing-title{font-size:28px}
+.image-5-4{aspect-ratio:6/5}
+.Right>.d-flex:first-of-type{flex-wrap:wrap}
+.owner-actions{margin-top:18px}
+.reservation-card .form-control{font-size:14px}
 }
 
-.back-to-listings-link:hover {
-    color: #dc3545;
-}
 
-/* Star rating */
-.star-rating {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-.star-rating input[type="radio"] { display: none; }
-.star-rating label {
-  font-size: 1.5rem;
-  color: #ccc;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-.star-rating input[type="radio"]:checked ~ label,
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color: #ffc107;
-}
+.listing-top~.row{--bs-gutter-x:32px}
 
-/* Top section grid */
-.listing-top {
-  display: grid;
-  grid-template-columns: 6fr 5fr;
-  gap: 2rem;
-  align-items: start;
-  margin-bottom: 3rem;
-}
-
-/* Image 5:4 ratio */
-.image-5-4 {
-  width: 100%;
-  aspect-ratio: 6/4;
-  object-fit: cover;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* Listing title */
-.listing-title {
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin-bottom: 0.5rem;
-}
-
-/* Owner action buttons */
-.owner-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-}
-.owner-actions form {
-  display: inline;
-}
-
-/* Wishlist Button on Show Page */
-.wishlist-btn-show-page {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    color: #333;
-    background-color: #fff;
-    text-decoration: none;
-    white-space: nowrap;
-}
-.wishlist-btn-show-page:hover {
-    background-color: #f8f9fa;
-    border-color: #ccc;
-}
-.wishlist-btn-show-page .fa-heart {
-    color: #dc3545;
-}
-.wishlist-btn-show-page .fa-solid {
-    font-weight: 900;
-}
-
-/* Booked Dates card */
-.booked-dates-card {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-}
-.booked-dates-card h4 {
-  border-bottom: 1px solid #dee2e6;
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
-}
-.booked-dates-list { list-style: none; padding: 0; margin: 0; }
-.booked-dates-list li {
-  display: flex; align-items: center; padding: 0.75rem 0;
-  border-bottom: 1px solid #e9ecef;
-}
-.booked-dates-list li:last-child { border-bottom: none; }
-.booked-dates-list .icon { color: #dc3545; font-size: 1.5rem; margin-right: 1rem; }
-.booked-dates-list .date-range { font-weight: 500; }
-
-/* Price breakdown */
-.price-breakdown-row { display: flex; justify-content: space-between; padding: 0.5rem 0; color: #495057; }
-.price-breakdown-total { font-weight: bold; font-size: 1.1rem; border-top: 1px solid #dee2e6; margin-top: 0.5rem; padding-top: 1rem; }
-
-/* Right Column adjustments */
-.Right{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-/* Buttons - square with rounded edges */
-.btn {
-  border-radius: 0.5rem !important;
-  padding: 0.5rem 1.25rem;
-}
-
-/* Responsive adjustments */
-@media(max-width: 991px) {
-  .listing-top {
-    grid-template-columns: 1fr;
-  }
-  .Right {
-    margin-top: 1.5rem;
-  }
-}

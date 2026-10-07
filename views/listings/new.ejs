@@ -1,11 +1,11 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/css/forms.css">
 
-<div class="row mt-5">
+<div class="row hosting-form">
     <div class="col-lg-12 col-md-12">
         <div class="form-card">
             <div class="form-header">
-                <h2>Create a New Listing</h2>
+                <p class="eyebrow">BECOME A HOST</p><h1>Share your somewhere.</h1><p class="form-description">Give travellers a glimpse of your space. Start with the details that make it special.</p>
             </div>
             <form action="/listings" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="mb-3">
@@ -25,10 +25,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label for="price" class="form-label">Price</label>
+                        <label for="price" class="form-label">Nightly price (₹)</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-tag-fill"></i></span>
-                            <input type="number" class="form-control" id="price" name="listing[price]" placeholder="Enter price" required>
+                            <input type="number" class="form-control" id="price" min="0" name="listing[price]" placeholder="Enter price" required>
                         </div>
                     </div>
                     <div class="col-md-8 mb-3">

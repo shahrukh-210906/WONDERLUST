@@ -1,164 +1,36 @@
-/* Main container for profile page */
-.profile-container {
-    max-width: 960px;
+.profile-container{max-width:1100px}
+.profile-header{display:flex;align-items:center;gap:20px;padding:24px;background:var(--soft);border:1px solid var(--line);border-radius:14px}
+.profile-avatar{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#dce1d3;color:#3d5142;font-size:25px;font-weight:600;flex-shrink:0}
+.profile-username{font-size:24px;font-weight:600;margin:0 0 4px;overflow-wrap:anywhere}
+.profile-email{font-size:14px;margin:0;overflow-wrap:anywhere}
+.profile-tabs{border-bottom:1px solid var(--line);gap:18px}
+.profile-tabs .nav-link{font-size:14px;font-weight:600;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:16px 2px;background:transparent}
+.profile-tabs .nav-link.active{color:var(--accent);border-color:var(--accent);background:transparent}
+.tab-content{padding-top:16px}
+.booking-card{display:flex;align-items:center;gap:24px;padding:18px;background:white;border:1px solid var(--line);border-radius:14px;position:static;box-shadow:none}
+.booking-card-img-link{flex-shrink:0}
+.booking-card-img-link img{width:150px;height:120px;object-fit:cover;border-radius:9px}
+.booking-card-info{flex:1;min-width:0}
+.booking-card-title{font-size:18px;font-weight:600;margin-bottom:8px;overflow-wrap:anywhere}
+.booking-card-dates,.booking-card-guests{font-size:13px;margin:3px 0}
+.booking-card-actions{flex-shrink:0}
+.wishlist-item-link{color:var(--ink)}
+.wishlist-item-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:white;transition:transform .2s}
+.wishlist-item-card:hover{transform:translateY(-3px)}
+.wishlist-item-img{width:100%;aspect-ratio:5/4;object-fit:cover}
+.wishlist-item-info{padding:18px}
+.wishlist-item-info h6{font-size:16px;margin-bottom:7px!important}
+.wishlist-item-info small{font-size:12px}
+.tab-pane .empty-state{min-height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:20px}
+.tab-pane .empty-state p{max-width:390px;font-size:14px}
+.tab-pane .empty-state h2{font-size:25px}
+@media(max-width:767px){.booking-card{flex-wrap:wrap;gap:16px}
+.booking-card-img-link img{width:95px;height:100px}
+.booking-card-actions{width:100%;padding-top:12px;border-top:1px solid var(--line)}
+.booking-card-actions .btn{width:100%}
+.profile-header{padding:20px 16px}
+.profile-tabs{gap:12px}
+.profile-tabs .nav-link{font-size:13px}
+.profile-email{font-size:12px}
 }
 
-/* Profile Header Styles */
-.profile-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background-color: #f8f9fa;
-    border-radius: 1rem;
-}
-
-.profile-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #dc3545;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    font-weight: 600;
-    flex-shrink: 0;
-}
-
-.profile-username {
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-}
-
-.profile-email {
-    font-size: 1rem;
-    margin-bottom: 0;
-}
-
-/* Tab Styles */
-.profile-tabs {
-    border-bottom: 1px solid #dee2e6;
-}
-
-.profile-tabs .nav-link {
-    color: #495057;
-    font-weight: 600;
-    border: 0;
-    border-bottom: 3px solid transparent;
-    padding: 0.75rem 1rem;
-    transition: all 0.2s ease;
-}
-
-.profile-tabs .nav-link:hover {
-    color: #000;
-}
-
-.profile-tabs .nav-link.active {
-    color: #dc3545;
-    border-bottom: 3px solid #dc3545;
-    background-color: transparent;
-}
-
-.tab-content {
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-top: 0;
-    border-radius: 0 0 0.5rem 0.5rem;
-    padding: 1rem;
-}
-
-/* Booking Card Styles */
-.booking-card {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1rem;
-    background-color: #fff;
-    border: 1px solid #e9ecef;
-    border-radius: 0.75rem;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.booking-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.booking-card-img-link img {
-    width: 100px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 0.5rem;
-    flex-shrink: 0;
-}
-
-.booking-card-info {
-    flex-grow: 1;
-}
-
-.booking-card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
-
-.booking-card-dates,
-.booking-card-guests {
-    margin-bottom: 0.25rem;
-    font-size: 0.9rem;
-}
-
-/* Wishlist Item Styles (Refined) */
-.wishlist-item-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.wishlist-item-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.wishlist-item-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-}
-
-.wishlist-item-img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-}
-
-.wishlist-item-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
-    color: white;
-}
-
-.wishlist-item-info h6 {
-    font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
-    font-size: 0.95rem;
-}
-
-/* Empty State Styles */
-.tab-pane .text-center {
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.text-muted{
-    color: white !important;
-}

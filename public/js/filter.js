@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const filterItems = document.querySelectorAll('.filter-item, .offcanvas-filter-item');
+    const filterItems = document.querySelectorAll('.filter-item[data-category], .offcanvas-filter-item[data-category]');
 
     filterItems.forEach(item => {
         item.addEventListener('click', function(event) {

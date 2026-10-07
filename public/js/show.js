@@ -9,15 +9,15 @@ if (!checkInInput) return;
 const serviceFeePriceSpan = document.getElementById('service-fee-price');
     const totalPriceSpan = document.getElementById('total-price');
 
-    const pricePerNight = Number('<%= listing.price %>');
+    const pricePerNight = Number(document.getElementById('booking-data').dataset.price);
     const serviceFeeRate = 0.18;
-const bookings = JSON.parse('<%- JSON.stringify(bookings) %>');
+const bookings = JSON.parse(document.getElementById('booking-data').dataset.bookings);
 
     const bookedDates = [];
 bookings.forEach(booking => {
         let start = new Date(booking.checkIn);
         let end = new Date(booking.checkOut);
-        for (let dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
+        for (let dt = start; dt < end; dt.setDate(dt.getDate() + 1)) {
             bookedDates.push(new Date(dt).toISOString().split('T')[0]);
         }
     });

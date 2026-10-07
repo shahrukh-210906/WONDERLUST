@@ -3,12 +3,12 @@
 
 <div class="container my-5 profile-container">
 
-    <div class="profile-header mb-5">
+    <div class="page-heading"><div><p class="eyebrow">YOUR OWN LITTLE CORNER</p><h1>Your next chapter.</h1><p>Upcoming escapes and places you’re dreaming of.</p></div><a href="/listings" class="btn btn-outline-dark">Find a stay ↗</a></div><div class="profile-header mb-4">
         <div class="profile-avatar">
             <%= currUser.username.charAt(0).toUpperCase() %>
         </div>
         <div class="profile-info">
-            <h1 class="profile-username"><%= currUser.username %></h1>
+            <h2 class="profile-username"><%= currUser.username %></h2>
             <p class="profile-email text-muted"><%= currUser.email %></p>
         </div>
     </div>
@@ -35,7 +35,7 @@
                         <div class="col">
                             <div class="booking-card">
                                 <a href="/listings/<%= booking.listing._id %>" class="booking-card-img-link">
-                                    <img src="<%= booking.listing.image.url %>" alt="<%= booking.listing.title %>">
+                                    <img src="<%= booking.listing.image?.url || '/images/listing-placeholder.svg' %>" alt="<%= booking.listing.title %>">
                                 </a>
                                 <div class="booking-card-info">
                                     <h5 class="booking-card-title"><%= booking.listing.title %></h5>
@@ -56,8 +56,8 @@
                     <% }) %>
                 </div>
             <% } else { %>
-                <div class="text-center py-5">
-                    <p class="lead text-muted">You have no active bookings.</p>
+                <div class="text-center py-5 empty-state">
+                    <i class="bi bi-suitcase-lg" aria-hidden="true"></i><h2>Your next trip starts here.</h2><p class="text-muted">Find a place you love and give yourself something to look forward to.</p>
                     <a href="/listings" class="btn btn-dark">Explore Stays</a>
                 </div>
             <% } %>
@@ -70,7 +70,7 @@
                         <div class="col">
                             <a href="/listings/<%= item._id %>" class="wishlist-item-link">
                                 <div class="wishlist-item-card">
-                                    <img src="<%= item.image.url %>" class="wishlist-item-img" alt="<%= item.title %>">
+                                    <img src="<%= item.image?.url || '/images/listing-placeholder.svg' %>" class="wishlist-item-img" alt="<%= item.title %>">
                                     <div class="wishlist-item-info">
                                         <h6 class="mb-0"><%= item.title %></h6>
                                         <small class="text-muted"><%= item.location %></small>
@@ -81,8 +81,8 @@
                     <% }) %>
                 </div>
             <% } else { %>
-                 <div class="text-center py-5">
-                    <p class="lead text-muted">Your wishlist is empty.</p>
+                 <div class="text-center py-5 empty-state">
+                    <i class="bi bi-heart" aria-hidden="true"></i><h2>Keep a little inspiration.</h2><p class="text-muted">Save the stays you love. They’ll be waiting here when you’re ready.</p>
                     <a href="/listings" class="btn btn-dark">Find Your Next Favorite</a>
                 </div>
             <% } %>

@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     const result = await response.json();
                     if (result.success) {
+                        button.setAttribute('aria-pressed', String(result.added));
                         const textSpan = button.querySelector('span'); // Get the text span if it exists
 
                         if (result.added) {
