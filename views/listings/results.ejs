@@ -30,9 +30,10 @@
 
             <div class="card-info">
 
-              <p><b><%= listing.title %></b></p>
+              <p class="stay-category"><%= listing.category || "Stay" %></p>
+              <h2 class="stay-title"><%= listing.title %></h2>
 
-              <p>₹<%= listing.price ? listing.price.toLocaleString('en-IN') + ' / night' : 'Price not available' %></p>
+              <p class="stay-price"><% if (listing.price != null) { %><strong>₹<%= listing.price.toLocaleString('en-IN') %></strong> <span>/ night</span><% } else { %>Price not available<% } %></p>
 
               <p class="card-location">
 
