@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const neurolog = require('./utils/neurolog').createLogger();
+app.use(neurolog.middleware);
 const port = process.env.PORT || 3000;
 const path = require('path');
 const ejsMate = require('ejs-mate');
@@ -117,6 +119,7 @@ app.get('/', (req, res) => {
 
 app.use((req, res, next) => next(new (require('./utils/ExpressError'))(404, 'Page not found')));
 
+app.use(neurolog.errorMiddleware);
 app.use((err, req, res, next) => {
   if (res.headersSent) return next(err);
   const { status = 500, message = 'Something went wrong' } = err;
@@ -128,6 +131,8 @@ async function start() {
     await mongoose.connect(dbURL, { serverSelectionTimeoutMS: 10000 });
     await store.collectionP;
     console.log('Connected to MongoDB');
+    neurolog.log('Database connection established');
+    neurolog.log('Wonderlust application starting');
     const server = app.listen(port, '0.0.0.0', () => {
       console.log(`Server is listening on port ${port}`);
     });
@@ -137,6 +142,7 @@ async function start() {
       process.exitCode = 1;
     });
   } catch (err) {
+    neurolog.log('Database connection failed', 3);
     console.error('Database connection failed. Check ATLASDB_URL and Atlas network access.', err.code || err.name);
     await mongoose.disconnect();
     process.exitCode = 1;
