@@ -7,6 +7,11 @@ module.exports.createBooking = async (req, res) => {
 
     const listing = await Listing.findById(id);
 
+    if (!listing || listing.isDemo) {
+        req.flash('error', listing ? 'Demo stays are for preview only and cannot be booked.' : 'Cannot find that listing.');
+        return res.redirect('/listings');
+    }
+
     // Check for booking conflicts
     const existingBooking = await Booking.findOne({
         listing: id,
