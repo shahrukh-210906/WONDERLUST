@@ -1,5 +1,5 @@
-.custom-navbar{background:var(--paper);border-bottom:1px solid var(--line);min-height:100px;padding:20px 0}
-.navbar-brand{display:flex;align-items:center;font-family:Manrope,sans-serif;font-size:24px;font-weight:800;letter-spacing:-1.2px;color:var(--ink);margin-right:34px}
+.custom-navbar{background:var(--paper);border-bottom:1px solid var(--line);min-height:84px;padding:16px 0}
+.navbar-brand{display:flex;align-items:center;font-family:'DM Sans',sans-serif;font-size:24px;font-weight:700;letter-spacing:-1.2px;color:var(--ink);margin-right:34px}
 .navbar-brand svg{width:33px;height:33px;fill:none;stroke:var(--accent);stroke-width:2;margin-right:8px}
 .navbar-brand span{font-weight:400}
 .navbar-brand b{color:var(--accent)}
@@ -31,4 +31,5 @@
 .custom-navbar .nav-link{padding:10px 0}
 .account-toggle{padding:0}
 }
+
 
