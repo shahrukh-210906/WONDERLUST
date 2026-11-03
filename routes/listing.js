@@ -6,7 +6,7 @@ const { storage } = require('../cloudConfig.js')
 const upload = multer({ storage });
 const wrapAsync = require('../utils/wrapAsync');
 const { listingSchema } = require('../schema.js');
-const { isLoggedIn, isOwner } = require('../middleware.js');
+const { isLoggedIn, isOwner, isAdmin } = require('../middleware.js');
 const listingsController = require('../controllers/listings');
 const ExpressError = require('../utils/ExpressError');
 
@@ -25,6 +25,8 @@ const validateListing = (req, res, next) => {
 
 // Routes
 router.get('/', wrapAsync(listingsController.index));
+
+router.post('/admin/demo-listings/import', isLoggedIn, isAdmin, wrapAsync(listingsController.importDemoListings));
 
 router.get('/new', isLoggedIn, listingsController.renderNewForm);
 
