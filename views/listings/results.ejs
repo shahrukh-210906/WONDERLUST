@@ -10,7 +10,7 @@
 
             <a href="/listings/<%= listing._id %>" class="card-link" aria-label="View <%= listing.title %>"></a>
 
-            <img loading="lazy" decoding="async" src="<%= imageUrl(listing.image?.url, 800) %>" srcset="<%= imageUrl(listing.image?.url, 400) %> 400w, <%= imageUrl(listing.image?.url, 800) %> 800w" sizes="(min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" alt="<%= listing.title %>">
+            <img loading="lazy" decoding="async" src="<%= imageUrl(listing.image?.url, 800) %>" srcset="<%= imageUrl(listing.image?.url, 400) %> 400w, <%= imageUrl(listing.image?.url, 800) %> 800w" sizes="(min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" alt="<%= listing.title %>" width="800" height="640">
 
             <% if (currUser) { %>
 
@@ -54,3 +54,4 @@
     </div>
 
   </div>
+
