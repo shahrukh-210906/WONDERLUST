@@ -16,12 +16,16 @@ module.exports.index = async (req, res) => {
         }
     }
 
-    if (q) {
+    if (typeof q === 'string' && q.trim()) {
+        const searchPattern = q.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         filter.$or = [
-            { title: { $regex: q, $options: 'i' } },
-            { location: { $regex: q, $options: 'i' } },
-            { country: { $regex: q, $options: 'i' } }
+            { title: { $regex: searchPattern, $options: 'i' } },
+            { location: { $regex: searchPattern, $options: 'i' } },
+            { country: { $regex: searchPattern, $options: 'i' } },
+            { description: { $regex: searchPattern, $options: 'i' } }
         ];
+        // The featured island is Bali, while demo properties use Ubud as their city.
+        if (/^bali$/i.test(q.trim())) filter.$or.push({ country: { $regex: '^Indonesia$', $options: 'i' } });
     }
 
     let listings;
@@ -31,11 +35,11 @@ module.exports.index = async (req, res) => {
             { $match: filter },
             { $addFields: { reviewCount: { $size: "$reviews" } } },
             { $sort: { reviewCount: -1 } },
-            { $project: { title: 1, price: 1, image: 1, location: 1, country: 1, category: 1 } }
+            { $project: { title: 1, price: 1, image: 1, location: 1, country: 1, category: 1, isDemo: 1 } }
         ];
         listings = await Listing.aggregate(pipeline);
     } else {
-        let query = Listing.find(filter, 'title price image location country category');
+        let query = Listing.find(filter, 'title price image location country category isDemo');
         switch (sort) {
             case 'price_asc':
                 query = query.sort({ price: 1 });
@@ -163,3 +167,4 @@ module.exports.deleteListing = async (req, res) => {
         res.redirect('/listings');
     }
 };
+
