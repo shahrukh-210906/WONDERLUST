@@ -7,6 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const status = document.getElementById('filter-status');
     const updateControls = (url) => {
         const categories = url.searchParams.getAll('category');
+        const search = document.getElementById('browse-destination');
+        if (search) search.value = url.searchParams.get('q') || '';
+        const context = document.getElementById('search-context');
+        if (context) {
+            const query = url.searchParams.get('q');
+            context.replaceChildren();
+            if (query) {
+                context.append(document.createTextNode(`Results for “${query}” · `));
+                const clear = document.createElement('a');
+                clear.href = '/listings'; clear.textContent = 'Clear search';
+                context.append(clear);
+            }
+        }
         document.querySelectorAll('[data-category]').forEach(item => {
             const active = item.dataset.category === 'All' ? !categories.length : categories.includes(item.dataset.category);
             item.classList.toggle('active', active);
@@ -19,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const sortText = document.getElementById('sort-btn-text');
         const selected = [...document.querySelectorAll('[data-sort-value]')].find(link => link.dataset.sortValue === url.searchParams.get('sort'));
-        if (sortText) sortText.textContent = selected ? selected.textContent.trim() : 'Sort By';
+        if (sortText) sortText.textContent = selected ? selected.textContent.trim() : 'Sort stays';
     };
     const load = async (url, push = true) => {
         request?.abort();
@@ -67,5 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (item.closest('.offcanvas')) bootstrap.Offcanvas.getInstance(item.closest('.offcanvas'))?.hide();
         load(url);
     });
+    updateControls(pendingUrl);
     window.addEventListener('popstate', () => load(new URL(location.href), false));
 });

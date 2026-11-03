@@ -53,6 +53,8 @@ module.exports.index = async (req, res) => {
     res.vary('X-Listing-Partial');
     res.render(req.get('X-Listing-Partial') === '1' ? 'listings/results' : 'listings/index', {
         listings,
+        searchQuery: typeof q === 'string' ? q : '',
+        currentSort: typeof sort === 'string' ? sort : '',
         categories: allCategories,
         currentCategories: Array.isArray(category) ? category : (category ? [category] : [])
     });

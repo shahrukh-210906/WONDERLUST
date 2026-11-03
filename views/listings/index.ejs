@@ -22,17 +22,20 @@
 
     const buildQuery = (newParams) => {
 
-      const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+      const params = new URLSearchParams();
+      if (typeof searchQuery !== 'undefined' && searchQuery) params.set('q', searchQuery);
 
+      if (typeof currentSort !== 'undefined' && currentSort) params.set('sort', currentSort);
       for (const key in newParams) {
 
-        params.set(key, newParams[key]);
+        if (newParams[key]) params.set(key, newParams[key]);
+        else params.delete(key);
 
       }
 
       // Preserve existing category filters for sort links
 
-      if (currentCategories && !newParams.category) {
+      if (currentCategories && !Object.prototype.hasOwnProperty.call(newParams, 'category')) {
 
         currentCategories.forEach(cat => params.append('category', cat));
 
@@ -48,11 +51,15 @@
 
 <div class="page-heading"><div><p class="eyebrow">The WonderLust collection</p><h1>Find your somewhere.</h1><p>Discover a cosy corner, a new perspective, or your next great escape.</p></div><span class="result-count"><%= listings.length %> <%= listings.length === 1 ? 'stay' : 'stays' %> to explore</span></div>
 
-    <div class="filter-container d-none d-lg-flex">
+    <form class="browse-search" action="/listings" method="GET" role="search">
+<label for="browse-destination">Find a destination or stay</label>
+<div><input id="browse-destination" type="search" name="q" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>" placeholder="City, country, or stay" maxlength="100"><button class="btn btn-primary" type="submit">Search stays</button></div>
+</form>
+<div class="filter-container">
 
         <div class="filter-scroll-container">
 
-            <a href="/listings" class="filter-item <%= currentCategories.length === 0 ? 'active' : '' %>" data-category="All">
+            <a href="<%= buildQuery({ category: '' }) %>" class="filter-item <%= currentCategories.length === 0 ? 'active' : '' %>" data-category="All">
 
                 <i class="fa-solid <%= categoryIcons.All %>"></i>
 
@@ -62,7 +69,7 @@
 
             <% for(let cat of categories) { %>
 
-                <a href="/listings?category=<%= encodeURIComponent(cat) %>" class="filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
+                <a href="<%= buildQuery({ category: cat }) %>" class="filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
 
                     <i class="fa-solid <%= categoryIcons[cat] || 'fa-home' %>"></i>
 
@@ -78,7 +85,7 @@
 
             <button class="btn btn-outline-dark dropdown-toggle sort-btn" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
 
-                <i class="bi bi-sort-down"></i> <span id="sort-btn-text">Sort By</span>
+                <i class="bi bi-sort-down"></i> <span id="sort-btn-text">Sort stays</span>
 
             </button>
 
@@ -102,7 +109,7 @@
 
     </div>
 
-    <div class="filter-bar-mobile d-lg-none mb-3">
+    <div class="filter-bar-mobile d-none">
 
         <button class="btn btn-dark w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtersOffcanvas" aria-controls="filtersOffcanvas">
 
@@ -112,6 +119,7 @@
 
     </div>
 
+<p id="search-context" class="search-context"><% if (typeof searchQuery !== "undefined" && searchQuery) { %>Results for “<%= searchQuery %>” · <a href="/listings">Clear search</a><% } %></p>
 <p id="filter-status" class="filter-status" role="status" aria-live="polite"></p>
 <%- include('results') %>
 </div>
@@ -134,7 +142,7 @@
 
               <div class="offcanvas-filter-list">
 
-                  <a href="#" class="offcanvas-filter-item <%= currentCategories.length === 0 ? 'active' : '' %>" data-category="All">
+                  <a href="/listings" class="offcanvas-filter-item <%= currentCategories.length === 0 ? 'active' : '' %>" data-category="All">
 
                       <i class="fa-solid <%= categoryIcons.All %>"></i> All
 
@@ -142,7 +150,7 @@
 
                   <% for(let cat of categories) { %>
 
-                      <a href="/listings?category=<%= encodeURIComponent(cat) %>" class="offcanvas-filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
+                      <a href="<%= buildQuery({ category: cat }) %>" class="offcanvas-filter-item <%= currentCategories.includes(cat) ? 'active' : '' %>" data-category="<%= cat %>">
 
                           <i class="fa-solid <%= categoryIcons[cat] || 'fa-home' %>"></i> <%= cat %>
 
