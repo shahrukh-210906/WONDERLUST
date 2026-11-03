@@ -1,22 +1,23 @@
 /* Apple design principles adapted to WonderLust's existing web flows. */
 :root {
-  --paper: #f6f5ee;
-  --ink: #203c32;
-  --muted: #5d6b61;
-  --accent: #285944;
-  --accent-hover: #173f2e;
+  --paper: #f4f0e6;
+  --surface: #fffdfa;
+  --ink: #183b40;
+  --muted: #607476;
+  --accent: #aa4e34;
+  --accent-hover: #8c3b28;
   --orange: var(--accent);
-  --line: #d6dbd0;
+  --line: #d8ded8;
   --border: var(--line);
-  --soft: #e9ece3;
+  --soft: #e7ece7;
   --display: 'DM Serif Display', Georgia, serif;
   --body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --bs-body-font-family: var(--display);
+  --bs-body-font-family: var(--body);
   --bs-body-color: var(--ink);
   --bs-body-bg: var(--paper);
   --bs-link-color: var(--accent);
   --bs-link-hover-color: var(--accent-hover);
-  --material: rgba(246, 245, 238, .94);
+  --material: rgba(244, 240, 230, .94);
 }
 body { font-family: var(--body); font-optical-sizing: auto; letter-spacing: 0; }
 h1, h2, h3, h4, h5, h6, .brand, .navbar-brand, .footer-brand,
@@ -46,7 +47,7 @@ header.wrap { width: 100%; padding-inline: max(3rem, calc((100% - 1224px) / 2));
 .custom-navbar { min-height: 84px; padding-block: 1rem; }
 @supports (backdrop-filter: blur(20px)) {
   header.wrap, .custom-navbar {
-    background: rgba(250, 250, 252, .84);
+    background: rgba(244, 240, 230, .84);
     backdrop-filter: saturate(160%) blur(20px);
   }
 }
@@ -56,7 +57,7 @@ header.wrap { width: 100%; padding-inline: max(3rem, calc((100% - 1224px) / 2));
 .navbar-toggler { border: 0; background: var(--soft); border-radius: 50%; }
 .custom-navbar .nav-link { font-size: .875rem; }
 .account-toggle { color: var(--ink); }
-.dropdown-menu { border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 12px 36px #00000014; }
+.dropdown-menu { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 0 12px 36px rgb(24 59 64 / 9%); }
 .dropdown-item { border-radius: 8px; min-height: 44px; display: flex; align-items: center; }
 .dropdown-item:active { color: #fff; background: var(--accent); }
 
@@ -75,10 +76,10 @@ header.wrap { width: 100%; padding-inline: max(3rem, calc((100% - 1224px) / 2));
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline: 3px solid var(--accent); outline-offset: 4px;
 }
-.form-control, .form-select { font-size: 1rem; border-radius: 12px; min-height: 50px; background: white; }
-.form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px #28594418; }
+.form-control, .form-select { font-size: 1rem; border-radius: 12px; min-height: 50px; background: var(--surface); }
+.form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgb(170 78 52 / 14%); }
 .form-label { font-size: .875rem; }
-.input-group-text { border-radius: 12px; background: white; }
+.input-group-text { border-radius: 12px; background: var(--surface); }
 .form-card, .reservation-card { border-radius: 24px; border: 1px solid var(--line); box-shadow: none; }
 .form-description, .form-footer-link { font-size: 1rem; }
 .auth-shell { border: 0; border-radius: 28px; margin-top: 2rem; }
@@ -89,27 +90,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* Photography belongs to the content; controls stay calm and legible. */
 .hero { margin-top: 1.5rem; border-radius: 28px; min-height: 640px; padding: 3rem; }
-.hero-content { border-radius: 24px; background: #fff; padding: 3rem; width: 540px; }
+.hero-content { border-radius: 24px; background: var(--surface); padding: 3rem; width: 540px; }
 .hero h1 { font-size: clamp(2.25rem, 4.4vw, 4rem); font-weight: 650; line-height: 1.06; letter-spacing: -.045em; }
 .hero-content>p:not(.eyebrow) { color: var(--muted); font-size: 1.0625rem; line-height: 1.55; }
 .caption { border-radius: 16px; background: var(--ink); padding: .75rem 1rem; }
-.caption small { color: #dedee3; }
-.search-wrap form { background: white; border-radius: 22px; padding: 1.5rem 2rem; }
+.caption small { color: #dce8e4; }
+.search-wrap form { background: var(--surface); border-radius: 22px; padding: 1.5rem 2rem; }
 .search-field input { font-size: 1rem; }
 .search-note { font-weight: 500; }
 .search-note small, .quick-search, .small, .footer-bottom { font-size: .8125rem; }
 .quick-search a { text-decoration: none; padding: .625rem 1rem; background: var(--soft); border-radius: 999px; }
-.quick-search a:hover { background: #dce3d8; }
+.quick-search a:hover { background: var(--soft); }
 .section-heading h2, .how h2, .host h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 650; }
 .text-link { border: 0; color: var(--accent); font-size: 1rem; }
 .destination-photo { border-radius: 20px; }
 .destination-card:nth-child(even) { padding-top: 0; }
 .destination-card h3 { font-size: 1.5rem; font-weight: 600; margin-top: 1rem; }
-.country { bottom: 12px; left: 12px; padding: .375rem .75rem; border-radius: 999px; background: white; color: var(--ink); }
 .card-arrow { border-radius: 50%; }
 .how { background: var(--ink); color: var(--paper); }
 .how h2 { color: var(--paper); }
-.how .intro, .steps p { color: #d0d9cf; }
+.how .intro, .steps p { color: #d5e0dc; }
 .steps h3 { font-size: 1.25rem; }
 .host>img { border-radius: 24px; }
 .card-container>img, .image-5-4 { border-radius: 20px; }
@@ -121,14 +121,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .filter-item.active:hover { background: var(--accent-hover); color: white; }
 .filter-scroll-container { overscroll-behavior-x: contain; }
 .wishlist-btn { box-shadow: 0 2px 8px #00000012; }
-.wishlist-btn[aria-pressed=true] { color: #b42318; }
+.wishlist-btn[aria-pressed=true] { color: #a43d31; }
 .Right .wishlist-btn-show-page { position: static; width: auto; height: auto; }
-.profile-header { background: white; border-radius: 24px; }
+.profile-header { background: var(--surface); border-radius: 24px; }
 .profile-username { font-family: var(--display); font-weight: 650; }
-.profile-avatar { background: #dce6d9; color: var(--accent); }
+.profile-avatar { background: var(--soft); color: var(--accent); }
 .profile-tabs { gap: .25rem; padding: .25rem; border: 0; border-radius: 14px; background: var(--soft); }
 .profile-tabs .nav-link { border: 0; padding: .75rem 1.25rem; border-radius: 11px; color: var(--ink); }
-.profile-tabs .nav-link.active { background: white; color: var(--ink); box-shadow: 0 1px 4px #00000012; }
+.profile-tabs .nav-link.active { background: var(--surface); color: var(--ink); box-shadow: 0 1px 4px rgb(24 59 64 / 8%); }
 .booking-card, .wishlist-item-card, .empty-state, .error-page { border-radius: 20px; }
 .booking-card-img-link img { border-radius: 12px; }
 .site-footer { background: var(--soft); }

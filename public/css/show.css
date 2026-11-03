@@ -12,7 +12,7 @@
 .category-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:12px;background:var(--soft);color:var(--accent);font-size:21px}
 .category-title{font-size:18px;margin:0 0 5px}
 .category-text{font-size:14px;margin:0}
-.reservation-card{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 35px #242b2808;z-index:5!important}
+.reservation-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 35px rgb(24 59 64 / 5%);z-index:5!important}
 .reservation-card .border{border-color:var(--line)!important;background:var(--paper)}
 .reservation-card label{font-size:10px;letter-spacing:1px;font-weight:700}
 .reservation-card h3{font-size:28px}
