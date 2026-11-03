@@ -2,7 +2,7 @@
 
 
 
-  <link rel="stylesheet" href="/css/listings.css?v=20261103">
+  <link rel="stylesheet" href="/css/listings.css?v=20261103-forest-2">
   <% if (currUser?.role === 'admin') { %>
     <form action="/listings/admin/demo-listings/import" method="POST" class="admin-demo-import"><span>Admin tools</span><button class="btn btn-outline-primary" type="submit">Import 100 demo stays</button></form>
   <% } %>
@@ -62,7 +62,7 @@
 
         <div class="filter-scroll-container">
 
-            <a href="<%= buildQuery({ category: '' }) %>" class="filter-item <%= currentCategories.length === 0 ? 'active' : '' %>" data-category="All">
+    <a href="/listings<%= searchQuery ? `?q=${encodeURIComponent(searchQuery)}` : '' %>" class="filter-item <%= currentCategories.length === 0 ? 'active' : '' %>" data-category="All">
 
                 <i class="fa-solid <%= categoryIcons.All %>"></i>
 
@@ -196,3 +196,4 @@
   </div>
 
 <script src="/js/sort.js"></script>
+
