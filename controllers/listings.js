@@ -60,6 +60,13 @@ module.exports.index = async (req, res) => {
     });
 };
 
+module.exports.importDemoListings = async (req, res) => {
+    const { importDemoListings } = require('../scripts/demoListings');
+    const added = await importDemoListings(req.user._id);
+    req.flash('success', `${added} demo stays imported. Existing listings were left untouched.`);
+    res.redirect('/listings');
+};
+
 module.exports.renderNewForm = (req, res) => {
     res.render('listings/new');
 };
