@@ -1,15 +1,15 @@
 /* Apple design principles adapted to WonderLust's existing web flows. */
 :root {
-  --paper: #f4f0e6;
-  --surface: #fffdfa;
-  --ink: #183b40;
-  --muted: #607476;
-  --accent: #aa4e34;
-  --accent-hover: #8c3b28;
+  --paper: #e9e5d8;
+  --surface: #f8f6ef;
+  --ink: #183d35;
+  --muted: #536b60;
+  --accent: #245b48;
+  --accent-hover: #174334;
   --orange: var(--accent);
-  --line: #d8ded8;
+  --line: #d7d8ca;
   --border: var(--line);
-  --soft: #e7ece7;
+  --soft: #dfe6da;
   --display: 'DM Serif Display', Georgia, serif;
   --body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --bs-body-font-family: var(--body);
@@ -17,7 +17,7 @@
   --bs-body-bg: var(--paper);
   --bs-link-color: var(--accent);
   --bs-link-hover-color: var(--accent-hover);
-  --material: rgba(244, 240, 230, .94);
+  --material: rgba(248, 246, 239, .94);
 }
 body { font-family: var(--body); font-optical-sizing: auto; letter-spacing: 0; }
 h1, h2, h3, h4, h5, h6, .brand, .navbar-brand, .footer-brand,
@@ -47,7 +47,7 @@ header.wrap { width: 100%; padding-inline: max(3rem, calc((100% - 1224px) / 2));
 .custom-navbar { min-height: 84px; padding-block: 1rem; }
 @supports (backdrop-filter: blur(20px)) {
   header.wrap, .custom-navbar {
-    background: rgba(244, 240, 230, .84);
+    background: rgba(248, 246, 239, .88);
     backdrop-filter: saturate(160%) blur(20px);
   }
 }
@@ -77,7 +77,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   outline: 3px solid var(--accent); outline-offset: 4px;
 }
 .form-control, .form-select { font-size: 1rem; border-radius: 12px; min-height: 50px; background: var(--surface); }
-.form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgb(170 78 52 / 14%); }
+.form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgb(36 91 72 / 14%); }
 .form-label { font-size: .875rem; }
 .input-group-text { border-radius: 12px; background: var(--surface); }
 .form-card, .reservation-card { border-radius: 24px; border: 1px solid var(--line); box-shadow: none; }
@@ -121,7 +121,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .filter-item.active:hover { background: var(--accent-hover); color: white; }
 .filter-scroll-container { overscroll-behavior-x: contain; }
 .wishlist-btn { box-shadow: 0 2px 8px #00000012; }
-.wishlist-btn[aria-pressed=true] { color: #a43d31; }
+.wishlist-btn[aria-pressed=true] { color: var(--accent-hover); }
 .Right .wishlist-btn-show-page { position: static; width: auto; height: auto; }
 .profile-header { background: var(--surface); border-radius: 24px; }
 .profile-username { font-family: var(--display); font-weight: 650; }
@@ -169,7 +169,7 @@ section[id] { scroll-margin-top: 110px; }
   header.wrap, .custom-navbar { background: var(--paper); backdrop-filter: none; }
 }
 @media (prefers-contrast: more) {
-  :root { --muted: #36363a; --line: #76767c; }
+  :root { --muted: #364b42; --line: #6c786b; }
   header.wrap, .custom-navbar { background: white; backdrop-filter: none; border-bottom: 1px solid var(--ink); }
   .button, .btn, .form-control, .form-select, .filter-item, .profile-tabs .nav-link { border: 1px solid currentColor; }
   .hero-content>p:not(.eyebrow), .section-heading p:not(.eyebrow) { color: var(--ink); }
@@ -229,3 +229,4 @@ section[id] { scroll-margin-top: 110px; }
   .motion-ready [data-reveal] { opacity: 1; transform: none; }
   .destination-photo img, .card-container>img, .wishlist-item-img { transition: none; }
 }
+

@@ -38,3 +38,20 @@ test('category updates preserve filters and render only the results fragment', a
         assert.match(empty, /No stays match/);
     } finally { Listing.find = original; }
 });
+
+test('destination searches match descriptions and escape regular-expression input', async () => {
+    const original = Listing.find;
+    let queryFilter;
+    Listing.find = filter => {
+        queryFilter = filter;
+        return { async lean() { return []; } };
+    };
+    try {
+        await controller.index({ query: { q: 'coast (Goa)' }, get: () => undefined }, {
+            vary() {}, render() {}
+        });
+        assert.equal(queryFilter.$or[0].title.$regex, 'coast \\(Goa\\)');
+        assert.equal(queryFilter.$or[3].description.$regex, 'coast \\(Goa\\)');
+    } finally { Listing.find = original; }
+});
+

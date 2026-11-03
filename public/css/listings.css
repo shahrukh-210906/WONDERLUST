@@ -13,7 +13,7 @@
 .card-container>img{width:100%;aspect-ratio:5/4;object-fit:cover;border-radius:14px;background:var(--soft)}
 .card-info{padding:17px 2px 16px;position:relative;pointer-events:none}
 .card-info p{margin:3px 0;font-size:14px}
-.card-info p:first-child{font-family:Manrope,sans-serif;font-size:17px;letter-spacing:-.4px;overflow-wrap:anywhere}
+.card-info p:first-child{font-family:'DM Sans',sans-serif;font-size:17px;letter-spacing:-.4px;overflow-wrap:anywhere}
 .card-info p:nth-child(2){font-size:14px;color:var(--ink)}
 .card-location{font-size:13px!important;color:var(--muted)}
 .card-location i{font-size:11px;margin-right:4px}
@@ -30,3 +30,4 @@
 }
 
 .filter-status{font-size:13px;color:var(--muted);min-height:22px;margin:0 0 12px}#stay-results[aria-busy="true"]{opacity:.6;pointer-events:none}
+
