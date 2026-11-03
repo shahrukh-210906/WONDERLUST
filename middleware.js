@@ -21,6 +21,14 @@ module.exports.isLoggedInApi = (req, res, next) => {
     next();
 };
 
+module.exports.isAdmin = (req, res, next) => {
+    if (!req.isAuthenticated?.() || req.user?.role !== 'admin') {
+        req.flash('error', 'Administrator access is required.');
+        return res.redirect('/login');
+    }
+    next();
+};
+
 // Middleware to save redirect URL into locals
 module.exports.saveRedirectUrl = (req, res, next) => {
     if (req.session.redirectUrl) {

@@ -30,6 +30,8 @@
 
             <div class="card-info">
 
+              <% if (listing.isDemo) { %><span class="demo-listing-badge">Demo stay</span><% } %>
+
               <p class="stay-category"><%= listing.category || "Stay" %></p>
               <h2 class="stay-title"><%= listing.title %></h2>
 

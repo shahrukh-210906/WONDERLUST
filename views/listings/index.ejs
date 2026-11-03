@@ -3,6 +3,9 @@
 
 
   <link rel="stylesheet" href="/css/listings.css?v=20261103">
+  <% if (currUser?.role === 'admin') { %>
+    <form action="/listings/admin/demo-listings/import" method="POST" class="admin-demo-import"><span>Admin tools</span><button class="btn btn-outline-primary" type="submit">Import 100 demo stays</button></form>
+  <% } %>
 
   <% 
 
