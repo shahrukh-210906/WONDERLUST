@@ -100,6 +100,8 @@ img { display: block; max-width: 100%; }
 .experiences { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: clamp(50px, 9vw, 138px); padding-block: 150px; }
 .experience-image { position: relative; height: clamp(480px, 62vw, 760px); overflow: hidden; background: #42665f; }
 .experience-image img { width: 100%; height: 100%; object-fit: cover; }
+.experience-image img { transition: opacity 260ms ease, transform 650ms var(--ease-out); }
+.experience-image img.is-changing { opacity: .45; transform: scale(1.015); }
 .experience-image>span { position: absolute; right: 20px; bottom: 20px; padding: 7px 10px; background: var(--forest); color: white; font-size: 13px; letter-spacing: .1em; }
 .experience-copy { max-width: 560px; }
 .section-index { margin: 0 0 30px; color: var(--accent); }
@@ -109,6 +111,8 @@ img { display: block; max-width: 100%; }
 .experience-links a { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; min-height: 59px; padding-inline: 10px; background: rgb(24 61 53 / 4%); font-size: 14px; transition: color 180ms ease, background-color 180ms ease; }
 .experience-links a>span { color: var(--accent); font-size: 13px; }
 .experience-links a>b { color: var(--accent); font-size: 18px; font-weight: 400; }
+.experience-links a.active { color: var(--ink); background: rgb(24 61 53 / 8%); }
+.experience-links a.active>b { transform: translate(2px, -2px); }
 .manifesto { position: relative; overflow: hidden; background: var(--forest); color: var(--paper-light); }
 .manifesto-inner { position: relative; min-height: 680px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding-block: 120px; }
 .manifesto .section-index { color: #dab47d; }
@@ -171,6 +175,7 @@ html.motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0
   .destination-card:hover .destination-arrow { background: var(--paper-light); color: var(--ink); transform: translate(2px, -2px); }
   .destination-card:hover .destination-wash { opacity: .83; }
   .experience-links a:hover { color: #8b5934; background-color: rgb(24 61 53 / 8%); }
+  .experience-image:hover img { transform: scale(1.025); }
   .button-light:hover { transform: translateY(-2px); background: white; }
   .footer-links a:hover, .footer-bottom a:hover { color: #e4c491; }
 }
@@ -293,5 +298,5 @@ html.motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0
   .hero-image, .hero-image-parallax, .hero h1>span, .hero-intro, .hero-bottom>p, .hero-bottom form, .scroll-cue i::after { animation: none; }
   .hero-image { transform: none; }
   html.motion-ready [data-reveal] { opacity: 1; transform: none; transition: opacity 180ms ease; }
-  .destination-card>img, .journal-image img, .experience-links a, .arrow-link span, .profile-link, .button-light, .hero-search button { transition-duration: 120ms; }
+  .destination-card>img, .journal-image img, .experience-image img, .experience-links a, .arrow-link span, .profile-link, .button-light, .hero-search button { transition-duration: 120ms; }
 }
