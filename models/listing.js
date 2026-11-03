@@ -35,6 +35,16 @@ const listingSchema = new Schema({
         type: String,
         enum: ['Beach', 'City', 'Mountain', 'Cabin', 'Historic', 'Treehouse', 'Ski', 'Luxury', 'Island', 'Villa', 'Cottage', 'Safari'],
     },
+    isDemo: {
+        type: Boolean,
+        default: false,
+        index: true
+    },
+    demoKey: {
+        type: String,
+        unique: true,
+        sparse: true
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,
